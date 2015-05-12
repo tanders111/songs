@@ -1,0 +1,36 @@
+﻿body { font-size: xx-small; margin-left: 80px; margin-right: 80px; color: white;background-color: darkblue;}
+
+.list-group-item {
+padding-top : 1px;
+padding-bottom : 1px;
+}
+
+.rightborder {border-right-width: 1px;}
+
+pre {
+    color: white;
+    border-width: 0px;
+    background-color: darkblue;
+    font-size: 6pt;
+	padding: 0px;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.songList {font-size: xx-small; }
+
+
+.songFrame {border-width: .5px; border-radius: 5px; border-color: white; padding: 1px;}
+
+@media print {
+        pre {
+    font-size: xx-small;
+    border-width: 0px;
+    background-color: white;
+    color: black;
+}
+
+}
