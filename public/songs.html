@@ -21,46 +21,30 @@
 
     <link rel="icon" type="image/png" href="/sixteenth-note.png">
     <script src="js/songs.js" type="text/javascript"></script>
-	<!--
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/angular.min.js" type="text/javascript"></script>
-    <script src="~/Scripts/angular-route.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
-	-->
-<style media="print">
-</style>
-<style>
-</style>
+<style media="print"></style>
+<style></style>
 
 <title>songs</title>
 
 </head>
 <body class="container" ng-controller="SongListCtrl">
     <div class="row">
-		<!--a target="_window" href="http://www.google.com">google</a-->
-		<div class="col-sm-2 col-lg-2 list-group small">
+
+		<div class="col-sm-2 col-lg-2 list-group small hidePrint">
       <!--input type="text" ng-model="selectedSong" typeahead="song.Title for song in songs | filter:$viewValue | limitTo:8" class="form-control"-->
-      <input style="color:blue;" ng-model="titleFilter"></input><span class="glyphicon glyphicon-search"></span>
-				<a ng-repeat="song in songs" class="list-group-item" ng-click="showSong(song.File)"
+      <span class="form-group has-feedback">
+      <input type="text" style="color:darkblue; width: 75%;" ng-model="titleFilter" placeholder="Search"></input>
+      <!--<i class="form-control-feedback glyphicon glyphicon-search"  style="color: red;padding: 0; margin: 0; top: 0;"></i>-->
+    </span>
+      <!--<span  class="glyphicon glyphicon-search"></span>-->
+			<span  class="glyphicon glyphicon-print" style="display:inline;"  onclick="window.print();"></span>
+      	<a ng-repeat="song in songs" class="list-group-item" ng-click="showSong(song.File)"
 				ng-class="{active:currentSong==song.File}">{{song.Title}} </a>
 		</div>
 
 		<div class="col-sm-10 col-lg-10 songFrame">
-			<div class="row">
-				<div class="col-sm-12">
-					<pre>{{header}}</pre>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<pre>{{block0}}</pre>
-				</div>
-				<div class="col-sm-6">
-					<pre>{{block1}}</pre>
-				</div>
-			</div>
+			<div ng-include="'partials/song.html'">
 		</div>
 	</div>
 </body>

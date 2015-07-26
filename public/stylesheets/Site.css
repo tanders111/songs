@@ -26,11 +26,12 @@ pre {
 .songFrame {border-width: .5px; border-radius: 5px; border-color: white; padding: 1px;}
 
 @media print {
-        pre {
+pre {
     font-size: xx-small;
     border-width: 0px;
     background-color: white;
     color: black;
 }
 
+.hidePrint { display: none;}
 }
