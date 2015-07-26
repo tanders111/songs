@@ -37,8 +37,6 @@
       <input type="text" style="color:darkblue; width: 75%;" ng-model="titleFilter" placeholder="Search"></input>
       <!--<i class="form-control-feedback glyphicon glyphicon-search"  style="color: red;padding: 0; margin: 0; top: 0;"></i>-->
     </span>
-      <!--<span  class="glyphicon glyphicon-search"></span>-->
-			<span  class="glyphicon glyphicon-print" style="display:inline;"  onclick="window.print();"></span>
       	<a ng-repeat="song in songs" class="list-group-item" ng-click="showSong(song.File)"
 				ng-class="{active:currentSong==song.File}">{{song.Title}} </a>
 		</div>
