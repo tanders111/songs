@@ -1,4 +1,4 @@
-﻿body { font-size: xx-small; margin-left: 80px; margin-right: 80px; color: white;background-color: darkblue;}
+﻿body { font-size: xx-small; margin-top: 5px; margin-left: 80px; margin-right: 80px; color: white;background-color: midnightblue;}
 
 .list-group-item {
 padding-top : 1px;
@@ -10,7 +10,7 @@ padding-bottom : 1px;
 pre {
     color: white;
     border-width: 0px;
-    background-color: darkblue;
+    background-color: midnightblue;
     font-size: 6pt;
 	padding: 0px;
 }
