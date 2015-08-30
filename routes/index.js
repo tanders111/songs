@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/song/:name', function(req, res, next) {
-  
+
   //var u = url.parse(req.path, true); //from request
   var name = req.params.name;
   console.log(name);
@@ -59,7 +59,10 @@ var parse = function(song)
 	var idx = 0;
 	while (idx < lines.length && !(lines[idx].indexOf("@quit") ===0)) {
 		var line = lines[idx];
-	
+	   if (line && line.trim) {
+       line = line.trim();
+     } 
+
 		if (isheader) {
 			if (line.indexOf("---") === 0) {
 				isheader = false;
@@ -80,4 +83,3 @@ var parse = function(song)
 	parsed.Blocks = blocks;
 	return parsed;
 }
-
