@@ -15,19 +15,31 @@ songApp.controller('SongListCtrl', function($scope, $http) {
       return a.Title.localeCompare(b.Title)
     });
     $scope.songs = songList;
-    $scope.showSong(songList[0].File);
+
+    var initial = localStorage.getItem("lastSong");
+
+    for (var idx in $scope.songs) {
+      if ($scope.songs[idx].File == initial) var found = initial;
+    }
+
+    if (!found) found = songList[0].File;
+
+    $scope.showSong(found);
   });
 
   $scope.showSong = function(fileName) {
-
+    localStorage.setItem("lastSong", fileName);
     $scope.currentSong = fileName;
     var config = { /*params: { name: fileName } */ };
 
     $http.get('song/' + fileName, config).success(function(data) {
-      var blocks = data.Blocks;
+      $scope.unparsed = data;
+      var parsed = parse(data);
+      var blocks = parsed.Blocks;
       $scope.block0 = blocks[0] ? blocks[0].join('\r\n') : "";
       $scope.block1 = blocks.length > 1 ? blocks[1].join('\r\n') : "";
-      $scope.header = data.Header.join('\r\n');
+      $scope.header = parsed.Header.join('\r\n');
+      $scope.singlePage = blocks.length === 1 && parsed.Header.length + blocks[0].length < 77;
     });
 
   }
@@ -46,6 +58,47 @@ songApp.controller('SongListCtrl', function($scope, $http) {
 
     }
   }
+  var parse = function(data)
+  {
+    lines = data.lines;
+  	var maxLines = 70;
+  	var parsed = {};
+  	parsed.FileName = data.name;//path.Name;
+  	var isheader = true;
+  	var header = [];
+  	var blocks = [];
+  	var currentBlock = [];
+  	blocks.push(currentBlock);
+
+  	var idx = 0;
+  	while (idx < lines.length && !(lines[idx].indexOf("@quit") ===0)) {
+  		var line = lines[idx];
+  	   if (line && line.trim) {
+         //trim line to the right
+         line = line.replace(/~+$/, '');
+       }
+
+  		if (isheader) {
+  			if (line.indexOf("---") === 0) {
+  				isheader = false;
+  			} else {
+  				header.push(line);
+  			}
+  		} else {
+  			var br = line.indexOf("@br") > -1;
+  			if (br || currentBlock.length === maxLines) {
+  				currentBlock = [];
+  				blocks.push(currentBlock);
+  			}
+  			if (!br) currentBlock.push(line);
+  		}
+  		idx++;
+  	}
+  	parsed.Header = header;
+  	parsed.Blocks = blocks;
+  	return parsed;
+  }
+
   $scope.$watch('titleFilter', filterSongs);
-  
+
 });

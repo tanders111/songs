@@ -15,6 +15,10 @@ pre {
 	padding: 0px;
 }
 
+.singlePre {
+  font-size: 6pt;
+}
+
 .editableText {
   color:black;/*border:1px solid #999999;*/
   font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
@@ -36,6 +40,12 @@ pre {
     border-width: 0px;
     background-color: white;
     color: black;
+}
+
+.songFrame { margin-left: 50px;}
+
+.singlePre {
+  font-size: 9pt;
 }
 
 .hidePrint { display: none;}
