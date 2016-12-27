@@ -1,4 +1,6 @@
-﻿body { font-size: xx-small; margin-top: 5px; margin-left: 80px; margin-right: 80px; color: white;background-color: midnightblue;}
+﻿body { 
+
+font-size: xx-small; margin-top: 5px; margin-left: 80px; margin-right: 80px; color: white;background-color: midnightblue;}
 
 .list-group-item {
 padding-top : 1px;
@@ -7,7 +9,13 @@ padding-bottom : 1px;
 
 .rightborder {border-right-width: 1px;}
 
+.junkfonts {
+font-family: Georgia, ‘Times New Roman’, serif;
+font-family: Tahoma, Geneva, sans-serif;
+font-family: Century Gothic, sans-serif;
+}
 pre {
+
     color: white;
     border-width: 0px;
     background-color: midnightblue;
@@ -36,6 +44,7 @@ pre {
 
 @media print {
 pre {
+
     font-size: xx-small;
     border-width: 0px;
     background-color: white;
@@ -45,7 +54,7 @@ pre {
 .songFrame { margin-left: 50px;}
 
 .singlePre {
-  font-size: 9pt;
+  font-size: 8pt;
 }
 
 .hidePrint { display: none;}

@@ -11,6 +11,12 @@ cd songs    (cloning creates the directory)
 npm install   (installs dependencies defined in package.json )
 [rootdir]\node ./bin/www   (starts  the app listening on port 3000 defined in www file  )
 
+service uses nssm configured 
+path     = C:\Program Files\nodejs\node.exe
+startdir = c:\dev\node\songs
+arguments= bin/www
+logs redirected to c:\tmp\log
+
 errata
 ------
 look under 'routes' for server side song controllers
@@ -19,3 +25,5 @@ songs.bat file c:\bin
 
 
 bogus --> c:\tmp\songs\DEBUG songs & npm start
+
+
