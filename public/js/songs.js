@@ -45,19 +45,33 @@ songApp.controller('SongListCtrl', function($scope, $http) {
   }
 
   var filterSongs = function(newVal, oldVal) {
+    var pushed = {};
     if ($scope.allSongs) {
       $scope.songs = [];
       for (var i = 0; i < $scope.allSongs.length; i++) {
-        var s = $scope.allSongs[i].Title.toLowerCase();
+        var s = $scope.allSongs[i];
+        var title = s.Title.toLowerCase();
 
-        if ((!newVal || newVal.length === 0) || s.indexOf(newVal.toLowerCase()) != -1) {
-          $scope.songs.push($scope.allSongs[i]);
+        if (
+          (!newVal || newVal.length === 0)
+          || title.indexOf(newVal.toLowerCase()) != -1
+          || (newVal.length > 2 && matchesToken(s, newVal))
+        ) {
+          pushed[title] = title;
+          $scope.songs.push(s);
         }
-
       }
-
     }
   }
+
+  var matchesToken = function(song, txt) {
+    for (var i in song.SearchTokens) {
+      var token = song.SearchTokens[i];
+      if (token.indexOf(txt) != -1) return true;
+    }
+    return false;
+  }
+
   var parse = function(data)
   {
     lines = data.lines;
@@ -67,6 +81,8 @@ songApp.controller('SongListCtrl', function($scope, $http) {
   	var isheader = true;
   	var header = [];
   	var blocks = [];
+    var search = [];
+    var tokenResult = {searchTokens : []};
   	var currentBlock = [];
   	blocks.push(currentBlock);
 
@@ -96,6 +112,7 @@ songApp.controller('SongListCtrl', function($scope, $http) {
   	}
   	parsed.Header = header;
   	parsed.Blocks = blocks;
+
   	return parsed;
   }
 

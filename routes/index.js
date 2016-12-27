@@ -24,7 +24,6 @@ router.get('/song/:name', function(req, res, next) {
 });
 
 router.get('/songs', function(req, res, next) {
-	var home = "C:/doc/home/music/songs/input";
 	var songs = [];
 	var files = fs.readdirSync(home);
 	for (var i = 0; i < files.length; i++) {
@@ -34,7 +33,8 @@ router.get('/songs', function(req, res, next) {
 	  var song = {
                     Title : title,
                     Artist : "",
-                    File : f
+                    File : f,
+                    SearchTokens : getSearchTokens(f)
                 };
 		songs.push(song);
 	}
@@ -44,59 +44,29 @@ router.get('/songs', function(req, res, next) {
 
 module.exports = router;
 
+function getSearchTokens(fileName) {
+  var songPath = path.join(home, fileName);
+  var txt = fs.readFileSync(songPath, 'utf8');
+  txt = txt.replace( /\n/g, "^^^" ).replace( /\r/g, "" );
+  var r = {searchTokens : []};
+  var res = txt.split(" ");
+
+  for (var i in res) {
+    var x = res[i].trim().toLowerCase();
+    if (!r[x] && x.length > 2) {
+        r[x] = 1;
+        r.searchTokens.push(x);
+    }
+  }
+  return r.searchTokens;
+}
+var home = "C:/doc/home/music/songs/input";
 var getSongLines = function(song)
 {
-	var home = "C:/doc/home/music/songs/input";
 	var song = path.join(home, song);
 	var txt = fs.readFileSync(song, 'utf8');
   //get rid of newlines and split into an array
 	var lines = txt.replace( /\n/g, "^^^" ).replace( /\r/g, "" ).split( "^^^" );
+
   return lines;
-}
-
-//no longer used - moved to client
-var parse = function(song)
-{
-	var home = "C:/doc/home/music/songs/input";
-	var song = path.join(home, song);
-	var txt = fs.readFileSync(song, 'utf8');
-
-	var maxLines = 70;
-	var parsed = {};
-	parsed.FileName = path.Name;
-	var isheader = true;
-	var header = [];
-	var blocks = [];
-	var currentBlock = [];
-	blocks.push(currentBlock);
-  //get rid of newlines and split into an array
-	var lines = txt.replace( /\n/g, "^^^" ).replace( /\r/g, "" ).split( "^^^" );
-
-	var idx = 0;
-	while (idx < lines.length && !(lines[idx].indexOf("@quit") ===0)) {
-		var line = lines[idx];
-	   if (line && line.trim) {
-       //trim line to the right
-       line = line.replace(/~+$/, '');
-     }
-
-		if (isheader) {
-			if (line.indexOf("---") === 0) {
-				isheader = false;
-			} else {
-				header.push(line);
-			}
-		} else {
-			var br = line.indexOf("@br") > -1;
-			if (br || currentBlock.length === maxLines) {
-				currentBlock = [];
-				blocks.push(currentBlock);
-			}
-			if (!br) currentBlock.push(line);
-		}
-		idx++;
-	}
-	parsed.Header = header;
-	parsed.Blocks = blocks;
-	return parsed;
 }
