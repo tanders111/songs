@@ -44,6 +44,15 @@ router.get('/songs', function(req, res, next) {
 
 module.exports = router;
 
+router.get('/tmp/:file', function(req, res, next) {
+
+   var txt = fs.readFileSync('views/error.jade');
+   res.writeHead(200, {'Content-Type': 'text/html'});
+   res.write(txt);
+   res.end();
+
+});
+
 function getSearchTokens(fileName) {
   var songPath = path.join(home, fileName);
   var txt = fs.readFileSync(songPath, 'utf8');
@@ -60,7 +69,9 @@ function getSearchTokens(fileName) {
   }
   return r.searchTokens;
 }
-var home = "C:/doc/home/music/songs/input";
+//var home = "C:/doc/home/music/songs/input";
+var home = 'files';
+
 var getSongLines = function(song)
 {
 	var song = path.join(home, song);

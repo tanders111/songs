@@ -1,0 +1,654 @@
+[
+    {
+      "Message": null,
+      "Success": true,
+      "Id": 0,
+      "PaginatedResult": {
+        "TotalResultCount": 3,
+        "CurrentPage": 0,
+        "PageSize": 25,
+        "Results": [
+          {
+            "AccountName": "Demo EHR",
+            "IsAdmin": true,
+            "Location": {
+              "Address": {
+                "AddressLine1": "920 2nd Av S",
+                "AddressLine2": null,
+                "City": "Minneapolis",
+                "State": "MN",
+                "Zip": "55402",
+                "Zip4": null,
+                "CountryCode": "US"
+              },
+              "Email": null,
+              "Fax": {
+                "Number": "6124551212",
+                "Extension": null,
+                "SupportsSms": null,
+                "Qualifier": null
+              },
+              "Features": [
+                {
+                  "Description": "Send new Rx request message",
+                  "Id": "10005",
+                  "Name": "SendNewRxMsg"
+                },
+                {
+                  "Description": "Send PAInitiationRequest, PARequest, PACancelRequest, and PAAppealRequest Messages",
+                  "Id": "9998",
+                  "Name": "SendPARequestMsgs"
+                },
+                {
+                  "Description": "Enabled for Work Flow",
+                  "Id": "9995",
+                  "Name": "WorkFlow"
+                },
+                {
+                  "Description": "Receive PAInitiationResponse, PAResponse, PACancelResponse, and PAAppealResponse Messages",
+                  "Id": "9997",
+                  "Name": "ReceivePAResponseMsgs"
+                },
+                {
+                  "Description": "Include controlled substances in script messages",
+                  "Id": "10041",
+                  "Name": "ControlledSubstance"
+                },
+                {
+                  "Description": "Send refill response msg",
+                  "Id": "10009",
+                  "Name": "SendRefResMsg"
+                },
+                {
+                  "Description": "Receive refill request message",
+                  "Id": "10008",
+                  "Name": "ReceiveRefReqMsg"
+                },
+                {
+                  "Description": "Send cancel Rx request message",
+                  "Id": "10030",
+                  "Name": "SendCanRxMsg"
+                },
+                {
+                  "Description": "Receive cancel Rx response message",
+                  "Id": "10033",
+                  "Name": "ReceiveCanResMsg"
+                },
+                {
+                  "Description": "Send clinical message",
+                  "Id": "10043",
+                  "Name": "SendClinicalMessage"
+                },
+                {
+                  "Description": "Receive clinical message",
+                  "Id": "10044",
+                  "Name": "ReceiveClinicalMessage"
+                },
+                {
+                  "Description": "Send clinical event",
+                  "Id": "10045",
+                  "Name": "SendClinicalEvent"
+                },
+                {
+                  "Description": "Receive clinical event",
+                  "Id": "10046",
+                  "Name": "ReceiveClinicalEvent"
+                },
+                {
+                  "Description": "Send change Rx response message",
+                  "Id": "10013",
+                  "Name": "SendChgResMsg"
+                },
+                {
+                  "Description": "Receive change Rx request message",
+                  "Id": "10012",
+                  "Name": "ReceiveRxChgMsg"
+                },
+                {
+                  "Description": "Receive Med Management Medication Adherence message",
+                  "Id": "9984",
+                  "Name": "ReceiveMMPOCMedicationAdherence"
+                },
+                {
+                  "Description": "Receive Med Management High Risk Medication message",
+                  "Id": "9982",
+                  "Name": "ReceiveMMPOCHighRiskMedication"
+                },
+                {
+                  "Description": "Receive Med Management Missing Medication message",
+                  "Id": "9980",
+                  "Name": "ReceiveMMPOCMissingMedication"
+                },
+                {
+                  "Description": "Receive Med Management PDC message",
+                  "Id": "9976",
+                  "Name": "ReceiveMMPOCPDC"
+                },
+                {
+                  "Description": "Send Specialty Patient Onboard Initiation Message",
+                  "Id": "10152",
+                  "Name": "SendSPOInitiationRequest"
+                },
+                {
+                  "Description": "Receive Specialty Patient Onboard Initiation Response",
+                  "Id": "10155",
+                  "Name": "ReceiveSPOInitiationResponse"
+                }
+              ],
+              "LocationId": 1384800,
+              "ModifiedBy": null,
+              "ModifiedDateTime": "0001-01-01T00:00:00Z",
+              "Name": null,
+              "DirectAddress": "bob.dylan@demo.clinic.org",
+              "OtherPhones": [],
+              "PrimaryPhone": {
+                "Number": "6124551212",
+                "Extension": null,
+                "SupportsSms": null,
+                "Qualifier": null
+              },
+              "StandardizedAddress": {
+                "AddressStandardizationResult": "AC11,AE09,AS02,AS17",
+                "GeocodeResult": "GS06",
+                "IsUspsDeliverable": true,
+                "Latitude": 44.973659,
+                "Longitude": -93.271401,
+                "AddressLine1": "920 2nd Ave S",
+                "AddressLine2": null,
+                "City": "Minneapolis",
+                "State": "MN",
+                "Zip": "55402",
+                "Zip4": "3318",
+                "CountryCode": "US"
+              }
+            },
+            "LearnedProviderLocations": null,
+            "OrganizationName": null,
+            "PortalName": "Demo EHR Prescriber 10.6mu2",
+            "SpecialtyDescription": "Psychoanalyst",
+            "AccountId": 1316470,
+            "ActiveStartDate": "2014-02-16T14:50:12Z",
+            "ActiveEndDate": "2024-09-15T15:40:51Z",
+            "ActivelyPrescribingDate": "2017-01-14T04:00:29Z",
+            "BackupPortalId": 302,
+            "CertificateToPrescribe": null,
+            "Data2000WaiverId": null,
+            "DeaNumber": "MT4281262",
+            "DeaAuthorizingName": null,
+            "DefaultFlag": "1",
+            "DefaultLocationServiceLevel": 0,
+            "DentistLicenseNumber": null,
+            "DirectorySpecialties": [
+              {
+                "AppliesToAccount": false,
+                "AppliesToPharmacy": false,
+                "AppliesToProvider": true,
+                "InternalOnly": false,
+                "Required": false,
+                "Id": "128",
+                "Name": "Doctor"
+              }
+            ],
+            "FileId": null,
+            "FormerName": {
+              "FirstName": null,
+              "LastName": null,
+              "MiddleName": null,
+              "Prefix": null,
+              "Suffix": null
+            },
+            "Hin": null,
+            "InStoreNcpdpid": null,
+            "Veterinarian": false,
+            "MedicaidNumber": null,
+            "MedicareNumber": null,
+            "ModifiedBy": {
+              "Id": 292,
+              "LoginId": "tanderson",
+              "FirstName": "Todd",
+              "LastName": "Anderson"
+            },
+            "ModifiedDateTime": "2018-02-23T19:08:54.945Z",
+            "MutuallyDefined": null,
+            "Name": {
+              "FirstName": "Bob",
+              "LastName": "Dylan",
+              "MiddleName": null,
+              "Prefix": null,
+              "Suffix": null
+            },
+            "Npi": "1417945130",
+            "NpiLastAnalyzed": null,
+            "OptOutFlags": {
+              "CiFaxOptOut": false,
+              "CiMailOptOut": false,
+              "RenewalFaxOptOut": false
+            },
+            "OrganizationId": null,
+            "Pli": 0,
+            "PortalId": 1147,
+            "PpoNumber": null,
+            "PriorAuthorization": null,
+            "ReferenceNumberAlt1": null,
+            "ReferenceNumberAlt1Qualifier": null,
+            "RegistrationTime": "2014-02-16T14:50:12Z",
+            "RemsHealthcareProviderEnrollmentId": null,
+            "RequestedStartTime": "2014-02-16T14:50:12Z",
+            "SalesforceTrackingNote": null,
+            "SecurityKey": "340fc90d-9b39-478c-b56c-d3d88eab997d",
+            "SenderMessageId": "B29D7A7255C9494EA2F143E2B69E4F6C",
+            "ServiceLevels": [
+              {
+                "Abbreviation": "NEW",
+                "BitMask": 1,
+                "Description": "New",
+                "Id": 1
+              },
+              {
+                "Abbreviation": "EPA",
+                "BitMask": 128,
+                "Description": "ePA",
+                "Id": 15
+              },
+              {
+                "Abbreviation": "CS",
+                "BitMask": 2048,
+                "Description": "ControlledSubstance",
+                "Id": 11
+              },
+              {
+                "Abbreviation": "REF",
+                "BitMask": 2,
+                "Description": "Refill",
+                "Id": 2
+              },
+              {
+                "Abbreviation": "CRX",
+                "BitMask": 16,
+                "Description": "Cancel",
+                "Id": 5
+              },
+              {
+                "Abbreviation": "CIM",
+                "BitMask": 16384,
+                "Description": "CIMessage",
+                "Id": 13
+              },
+              {
+                "Abbreviation": "CIE",
+                "BitMask": 32768,
+                "Description": "CIEvent",
+                "Id": 14
+              },
+              {
+                "Abbreviation": "CHG",
+                "BitMask": 4,
+                "Description": "Change",
+                "Id": 3
+              },
+              {
+                "Abbreviation": "MedAdhere",
+                "BitMask": 0,
+                "Description": "MedicationAdherence",
+                "Id": 17
+              },
+              {
+                "Abbreviation": "HRiskMed",
+                "BitMask": 0,
+                "Description": "HighRiskMedication",
+                "Id": 18
+              },
+              {
+                "Abbreviation": "MissingMed",
+                "BitMask": 0,
+                "Description": "MissingMedication",
+                "Id": 19
+              },
+              {
+                "Abbreviation": "PDC",
+                "BitMask": 0,
+                "Description": "PDC",
+                "Id": 20
+              },
+              {
+                "Abbreviation": "SpecPtOn",
+                "BitMask": 0,
+                "Description": "SpecialtyPatientOnboard",
+                "Id": 29
+              }
+            ],
+            "SocialSecurity": null,
+            "Specialty": "102L00000X",
+            "SpecialtyQualifier": "NU",
+            "Spi": "6447592770001",
+            "StateControlSubstanceNumber": null,
+            "StateLicense": "MN",
+            "StateOfLicense": null,
+            "Test": 0,
+            "Upin": null,
+            "UseCases": [],
+            "VersionId": 8
+          },
+          {
+            "AccountName": "ProviderPortal",
+            "IsAdmin": true,
+            "Location": {
+              "Address": {
+                "AddressLine1": "920 2nd Ave S",
+                "AddressLine2": null,
+                "City": "Minneapolis",
+                "State": "MN",
+                "Zip": "55402",
+                "Zip4": "3318",
+                "CountryCode": "US"
+              },
+              "Email": null,
+              "Fax": {
+                "Number": "6124551212",
+                "Extension": null,
+                "SupportsSms": null,
+                "Qualifier": null
+              },
+              "Features": [
+                {
+                  "Description": "Enabled for Work Flow",
+                  "Id": "9995",
+                  "Name": "WorkFlow"
+                },
+                {
+                  "Description": "Send PAInitiationRequest, PARequest, PACancelRequest, and PAAppealRequest Messages",
+                  "Id": "9998",
+                  "Name": "SendPARequestMsgs"
+                },
+                {
+                  "Description": "Send PAInitiationResponse, PAResponse, PACancelResponse, and PAAppealResponse Messages",
+                  "Id": "9996",
+                  "Name": "SendPAResponseMsgs"
+                },
+                {
+                  "Description": "Receive PAInitiationRequest, PARequest, PACancelRequest, and PAAppealRequest Messages",
+                  "Id": "9999",
+                  "Name": "ReceivePARequestMsgs"
+                },
+                {
+                  "Description": "Receive PAInitiationResponse, PAResponse, PACancelResponse, and PAAppealResponse Messages",
+                  "Id": "9997",
+                  "Name": "ReceivePAResponseMsgs"
+                }
+              ],
+              "LocationId": 31391330,
+              "ModifiedBy": null,
+              "ModifiedDateTime": "0001-01-01T00:00:00Z",
+              "Name": null,
+              "DirectAddress": null,
+              "OtherPhones": [],
+              "PrimaryPhone": {
+                "Number": "6124551212",
+                "Extension": null,
+                "SupportsSms": null,
+                "Qualifier": null
+              },
+              "StandardizedAddress": {
+                "AddressStandardizationResult": "AE09,AS02,AS17",
+                "GeocodeResult": "GS06",
+                "IsUspsDeliverable": true,
+                "Latitude": 44.973659,
+                "Longitude": -93.271401,
+                "AddressLine1": "920 2nd Ave S",
+                "AddressLine2": null,
+                "City": "Minneapolis",
+                "State": "MN",
+                "Zip": "55402",
+                "Zip4": "3318",
+                "CountryCode": "US"
+              }
+            },
+            "LearnedProviderLocations": null,
+            "OrganizationName": null,
+            "PortalName": "ProviderPortal",
+            "SpecialtyDescription": "Psychoanalyst",
+            "AccountId": 1081530,
+            "ActiveStartDate": "2018-03-18T15:57:16.639Z",
+            "ActiveEndDate": "2068-03-18T15:57:15Z",
+            "ActivelyPrescribingDate": "1800-01-01T00:00:00Z",
+            "BackupPortalId": 302,
+            "CertificateToPrescribe": null,
+            "Data2000WaiverId": null,
+            "DeaNumber": null,
+            "DeaAuthorizingName": null,
+            "DefaultFlag": "1",
+            "DefaultLocationServiceLevel": 0,
+            "DentistLicenseNumber": null,
+            "DirectorySpecialties": [],
+            "FileId": null,
+            "FormerName": {
+              "FirstName": null,
+              "LastName": null,
+              "MiddleName": null,
+              "Prefix": null,
+              "Suffix": null
+            },
+            "Hin": null,
+            "InStoreNcpdpid": null,
+            "Veterinarian": false,
+            "MedicaidNumber": null,
+            "MedicareNumber": null,
+            "ModifiedBy": {
+              "Id": 1079238,
+              "LoginId": "ProviderPortal",
+              "FirstName": "ProviderPortal",
+              "LastName": "ProviderPortal"
+            },
+            "ModifiedDateTime": "2018-03-18T15:57:24.509Z",
+            "MutuallyDefined": null,
+            "Name": {
+              "FirstName": "Bob",
+              "LastName": "Dylan",
+              "MiddleName": null,
+              "Prefix": null,
+              "Suffix": null
+            },
+            "Npi": "1417945130",
+            "NpiLastAnalyzed": null,
+            "OptOutFlags": {
+              "CiFaxOptOut": false,
+              "CiMailOptOut": false,
+              "RenewalFaxOptOut": false
+            },
+            "OrganizationId": null,
+            "Pli": 0,
+            "PortalId": 553714,
+            "PpoNumber": null,
+            "PriorAuthorization": null,
+            "ReferenceNumberAlt1": null,
+            "ReferenceNumberAlt1Qualifier": null,
+            "RegistrationTime": "1800-01-01T00:00:00Z",
+            "RemsHealthcareProviderEnrollmentId": null,
+            "RequestedStartTime": "2018-03-18T15:57:15Z",
+            "SalesforceTrackingNote": null,
+            "SecurityKey": "4e1a68cc-cacc-4f94-84da-24ddd588908e",
+            "SenderMessageId": "bf6608240872428ca936f30f94d4f532",
+            "ServiceLevels": [
+              {
+                "Abbreviation": "EPA",
+                "BitMask": 128,
+                "Description": "ePA",
+                "Id": 15
+              }
+            ],
+            "SocialSecurity": null,
+            "Specialty": "102L00000X",
+            "SpecialtyQualifier": "NU",
+            "Spi": "6447592770002",
+            "StateControlSubstanceNumber": null,
+            "StateLicense": null,
+            "StateOfLicense": null,
+            "Test": 1,
+            "Upin": null,
+            "UseCases": [],
+            "VersionId": 8
+          },
+          {
+            "AccountName": "ProviderPortal",
+            "IsAdmin": true,
+            "Location": {
+              "Address": {
+                "AddressLine1": "920 2nd Ave S",
+                "AddressLine2": null,
+                "City": "Minneapolis",
+                "State": "MN",
+                "Zip": "55402",
+                "Zip4": "3318",
+                "CountryCode": "US"
+              },
+              "Email": null,
+              "Fax": {
+                "Number": "6124561212",
+                "Extension": null,
+                "SupportsSms": null,
+                "Qualifier": null
+              },
+              "Features": [
+                {
+                  "Description": "Enabled for Work Flow",
+                  "Id": "9995",
+                  "Name": "WorkFlow"
+                },
+                {
+                  "Description": "Send PAInitiationRequest, PARequest, PACancelRequest, and PAAppealRequest Messages",
+                  "Id": "9998",
+                  "Name": "SendPARequestMsgs"
+                },
+                {
+                  "Description": "Send PAInitiationResponse, PAResponse, PACancelResponse, and PAAppealResponse Messages",
+                  "Id": "9996",
+                  "Name": "SendPAResponseMsgs"
+                },
+                {
+                  "Description": "Receive PAInitiationRequest, PARequest, PACancelRequest, and PAAppealRequest Messages",
+                  "Id": "9999",
+                  "Name": "ReceivePARequestMsgs"
+                },
+                {
+                  "Description": "Receive PAInitiationResponse, PAResponse, PACancelResponse, and PAAppealResponse Messages",
+                  "Id": "9997",
+                  "Name": "ReceivePAResponseMsgs"
+                }
+              ],
+              "LocationId": 31401954,
+              "ModifiedBy": null,
+              "ModifiedDateTime": "0001-01-01T00:00:00Z",
+              "Name": null,
+              "DirectAddress": null,
+              "OtherPhones": [],
+              "PrimaryPhone": {
+                "Number": "6124551212",
+                "Extension": null,
+                "SupportsSms": null,
+                "Qualifier": null
+              },
+              "StandardizedAddress": {
+                "AddressStandardizationResult": "AE09,AS02,AS17",
+                "GeocodeResult": "GS06",
+                "IsUspsDeliverable": true,
+                "Latitude": 44.973659,
+                "Longitude": -93.271401,
+                "AddressLine1": "920 2nd Ave S",
+                "AddressLine2": null,
+                "City": "Minneapolis",
+                "State": "MN",
+                "Zip": "55402",
+                "Zip4": "3318",
+                "CountryCode": "US"
+              }
+            },
+            "LearnedProviderLocations": null,
+            "OrganizationName": null,
+            "PortalName": "ProviderPortal",
+            "SpecialtyDescription": "Psychoanalyst",
+            "AccountId": 1081530,
+            "ActiveStartDate": "2018-03-19T14:33:09.012Z",
+            "ActiveEndDate": "2068-03-19T14:33:08.2Z",
+            "ActivelyPrescribingDate": "1800-01-01T00:00:00Z",
+            "BackupPortalId": 302,
+            "CertificateToPrescribe": null,
+            "Data2000WaiverId": null,
+            "DeaNumber": null,
+            "DeaAuthorizingName": null,
+            "DefaultFlag": "1",
+            "DefaultLocationServiceLevel": 0,
+            "DentistLicenseNumber": null,
+            "DirectorySpecialties": [],
+            "FileId": null,
+            "FormerName": {
+              "FirstName": null,
+              "LastName": null,
+              "MiddleName": null,
+              "Prefix": null,
+              "Suffix": null
+            },
+            "Hin": null,
+            "InStoreNcpdpid": null,
+            "Veterinarian": false,
+            "MedicaidNumber": null,
+            "MedicareNumber": null,
+            "ModifiedBy": {
+              "Id": 1079238,
+              "LoginId": "ProviderPortal",
+              "FirstName": "ProviderPortal",
+              "LastName": "ProviderPortal"
+            },
+            "ModifiedDateTime": "2018-03-19T14:33:14.778Z",
+            "MutuallyDefined": null,
+            "Name": {
+              "FirstName": "Bob",
+              "LastName": "Dylan",
+              "MiddleName": null,
+              "Prefix": null,
+              "Suffix": null
+            },
+            "Npi": "1417945130",
+            "NpiLastAnalyzed": null,
+            "OptOutFlags": {
+              "CiFaxOptOut": false,
+              "CiMailOptOut": false,
+              "RenewalFaxOptOut": false
+            },
+            "OrganizationId": null,
+            "Pli": 0,
+            "PortalId": 553714,
+            "PpoNumber": null,
+            "PriorAuthorization": null,
+            "ReferenceNumberAlt1": null,
+            "ReferenceNumberAlt1Qualifier": null,
+            "RegistrationTime": "1800-01-01T00:00:00Z",
+            "RemsHealthcareProviderEnrollmentId": null,
+            "RequestedStartTime": "2018-03-19T14:33:08.2Z",
+            "SalesforceTrackingNote": null,
+            "SecurityKey": "032eab31-6912-40e4-a2ac-021c59e8f54e",
+            "SenderMessageId": "6e17786510c946edb2b401cf5a0dec51",
+            "ServiceLevels": [
+              {
+                "Abbreviation": "EPA",
+                "BitMask": 128,
+                "Description": "ePA",
+                "Id": 15
+              }
+            ],
+            "SocialSecurity": null,
+            "Specialty": "102L00000X",
+            "SpecialtyQualifier": "NU",
+            "Spi": "6447592770003",
+            "StateControlSubstanceNumber": null,
+            "StateLicense": null,
+            "StateOfLicense": null,
+            "Test": 1,
+            "Upin": null,
+            "UseCases": [],
+            "VersionId": 8
+          }
+        ],
+        "Include": []
+      }
+    }
+  ]

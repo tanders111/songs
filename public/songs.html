@@ -23,25 +23,44 @@
     <script src="js/songs.js" type="text/javascript"></script>
 
 <style media="print"></style>
-<style></style>
+<style>
+.full-height { max-height: 100vh;}
+</style>
 
 <title>songs</title>
-
+<!--
+<div style="height: 95vh;  padding: 0px; ">
+  <input type="text" class="form-control" style="color:midnightblue; height: 20px;  line-height: inherit; font-size: inherit" ng-model="titleFilter" placeholder="Search"></input>
+    <ul style="list-style:none; height: 600px; overflow: auto;">
+      <li ng-repeat="song in songs">
+      <a  class="list-group-item" ng-click="showSong(song.File)"	ng-class="{active:currentSong==song.File}">{{song.Title}} </a>
+    </li>
+  </ul>
+</div>
+-->
 </head>
-<body class="container" ng-controller="SongListCtrl">
-    <div class="row">
+<body class="" ng-controller="SongListCtrl">
 
-		<div class="col-sm-2 col-lg-2 list-group small hidePrint">
-      <!--input type="text" ng-model="selectedSong" typeahead="song.Title for song in songs | filter:$viewValue | limitTo:8" class="form-control"-->
-      <span class="form-group has-feedback">
-      <input type="text" style="color:midnightblue; width: 75%;" ng-model="titleFilter" placeholder="Search"></input>
-      <!--<i class="form-control-feedback glyphicon glyphicon-search"  style="color: red;padding: 0; margin: 0; top: 0;"></i>-->
-    </span>
-      	<a ng-repeat="song in songs" class="list-group-item" ng-click="showSong(song.File)"
-				ng-class="{active:currentSong==song.File}">{{song.Title}} </a>
-		</div>
+    <div class="full-height" style=" display: inline-block; ">
 
-		<div class="col-sm-10 col-lg-10 songFrame">
+    		<div class="small hidePrint">
+          <!--input type="text" ng-model="selectedSong" typeahead="song.Title for song in songs | filter:$viewValue | limitTo:8" class="form-control"-->
+
+            <!--<i class="form-control-feedback glyphicon glyphicon-search"  style="color: red;padding: 0; margin: 0; top: 0;"></i>-->
+
+
+          <div style="height: 95vh;  padding: 0px; overflow:auto">
+
+              <input type="text" class="form-control" style="color:midnightblue; height: 20px;  line-height: inherit; font-size: inherit" ng-model="titleFilter" placeholder="Search"></input>
+
+              <a  ng-repeat="song in songs" class="list-group-item" ng-click="showSong(song.File)"	ng-class="{active:currentSong==song.File}">{{song.Title}} </a>
+
+          </div>
+
+    		</div>
+    </div>
+
+  	<div class="songFrame full-height" style="display: inline-block; vertical-align: top; min-width: 600px;">
 			<div ng-include="'partials/song.html'">
 		</div>
 	</div>
