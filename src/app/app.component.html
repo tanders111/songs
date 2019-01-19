@@ -1,0 +1,18 @@
+<div class="container-fluid p-0"  *ngIf="!printing"  style=" height: calc(100vh); overflow: none;">
+
+    <div class=" d-inline-block " style="width: 200px;  height: calc(99vh); overflow: auto;">
+        <songs (onSongSelected)="selectSong($event)"></songs>
+    </div>
+   
+
+    <div class="ez-read d-inline-block p-3" style=" height: calc(99vh); overflow: auto;">
+        <song *ngIf="selectedSong" (onPrint)="print($event)" [songSummary]=selectedSong></song>
+    </div>
+
+   
+
+</div>
+
+<div  *ngIf="printing" class="container-fluid" style=" height: calc(99vh); overflow: visible;">
+    <song-print [song]=song (done)="printing = false"></song-print>
+</div>

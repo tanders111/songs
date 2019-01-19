@@ -1,0 +1,18 @@
+
+  <div class="" (keyup.arrowup)="up();$event.stopPropagation()" (keyup.arrowdown)="down()">
+
+    <div class="input-group input-group-sm">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fa fa-fw fa-search"></i></span>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="song" [ngbTypeahead]="search" [resultFormatter]="formatter"
+        [inputFormatter]="formatter" (selectItem)="selectItem($event)" placeholder="Search" />
+    </div>
+    
+    <div class="bg-white pl-1" *ngFor="let s of songs; let i = index;" >
+      <a class="list-group-item" href="javascript:void(0)" (click)="selectSong(s)" [class.active]="s==song">
+        {{s.title}}
+      </a>
+    </div>
+
+  </div>

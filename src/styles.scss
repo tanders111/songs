@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+
+/*  variables that override bootstrap go here*/
+$primary: #2885c5;
+
+//$font-size-base: 0.75rem; //12px
+$font-size-base: 0.875rem; //14px
+
+$font-family-base: "Helvetica Neue", "Roboto", Helvetica, Arial, sans-serif;
+
+@import '../node_modules/font-awesome/scss/font-awesome';
+
+//@import "../../node_modules/surescripts-glue/src/scss/_custom.scss"; //custom variables overrides before processing bootstrap components.
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+//@import "../../node_modules/surescripts-glue/src/scss/_glue-overrides.scss";
+
+
+a:not([href]):not([tabindex]) {
+    color: $link-color;
+    text-decoration: $link-decoration;
+}
+
+.ez-read {
+
+    color: white;
+    background-color: midnightblue;
+}
+
+
+pre {
+
+    color: white;
+    border-width: 0px;
+    background-color: midnightblue;
+    font-size: 6pt;
+	padding: 0px;
+}
+
+@media print {
+    
+    pre {
+    
+        font-size: x-small;
+        border-width: 0px;
+        background-color: white;
+        color: black;
+    }
+    
+    .songFrame { margin-left: 50px;}
+    
+    .singlePre {
+      font-size: 8pt;
+    }
+    
+    .hidePrint { display: none;}
+    }

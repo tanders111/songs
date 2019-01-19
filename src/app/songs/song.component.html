@@ -1,0 +1,32 @@
+<div class="ez-read" style="width: calc(100vw - 245px)" #detailDiv>
+  <div class="row">
+    <div class="col">
+      <pre>{{song?.header?.join('\n')}}</pre>
+
+    </div>
+
+    <div class="col-auto">
+
+      <i class="fa fa-fw fa-print pull-right" (click)=print()></i>
+    </div>
+  </div>
+  <hr class="mt-0 mb-1 bg-white"/>
+
+  <ng-container *ngFor="let b of song?.blocks; let i = index">
+
+    <div class="row" *ngIf="i % 2 == 0">
+
+      <div class="col">
+        <span *ngIf="showBlocks">{{i}}</span> 
+        <pre>{{b.lines.join('\n')}}</pre>
+      </div>
+
+      <div class="col" *ngIf="song.blocks.length > 1">
+          <span  *ngIf="showBlocks">{{i+1}}</span>
+        <pre *ngIf="song.blocks[i + 1]">{{song.blocks[i+1].lines.join('\n')}}</pre>
+      </div>
+
+    </div>
+  <hr style="background-color: white" *ngIf="i % 2 == 0">
+  </ng-container>
+</div>
