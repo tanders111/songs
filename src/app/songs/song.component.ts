@@ -7,14 +7,11 @@ import { parse } from 'querystring';
   templateUrl: './song.component.html',
   styleUrls: []
 })
-export class SongComponent implements OnInit, AfterViewInit {
+export class SongComponent implements OnInit {
 
   
   @Input() songSummary: SongSummary;
   @Output() onPrint: EventEmitter<Song> = new EventEmitter<Song>();
-  @ViewChild('detailDiv') detailDiv: ElementRef;
-
-  height;
 
   song: any;
 
@@ -22,11 +19,6 @@ export class SongComponent implements OnInit, AfterViewInit {
 
   async ngOnInit() {
    
-  }
-
-  async ngAfterViewInit() {
-    this.height = this.detailDiv.nativeElement.offsetHeight;
-    //await this.refresh();
   }
 
   async ngOnChanges() {
@@ -37,12 +29,9 @@ export class SongComponent implements OnInit, AfterViewInit {
     try {
       if (!this.songSummary) return;
 
-      let resp = await this.songService.getSong(this.songSummary.file);
-      let lines = resp.lines;
+      this.song = await this.songService.getSong(this.songSummary);
+      console.info('got song from ' + this.songSummary.file, this.song)
 
-      console.info('got song from ' + this.songSummary.file, this.songSummary)
-      this.song = this.parse(lines);
-      console.info('parsed song  ', this.song)
       } catch (e) {
         console.error('error getting song ', e);
         alert('error see log ' + e.message);
@@ -55,7 +44,7 @@ export class SongComponent implements OnInit, AfterViewInit {
     //if we want to change blocks on screen size change
      let height = window.innerHeight;
   }
-
+/*
   parse(lines: string[]) : Song
   {
     //var maxLines = 70;
@@ -100,7 +89,7 @@ export class SongComponent implements OnInit, AfterViewInit {
 
   	return parsed;
   }
-
+*/
 
   print() {
     this.onPrint.emit(this.song);

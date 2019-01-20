@@ -12,6 +12,8 @@ export class SongPrintComponent implements OnInit {
   @Input() song: Song;
   @Output() done: EventEmitter<boolean>  = new EventEmitter<boolean>();
 
+  printSong: Song;
+
   constructor(private songService: SongsService) { }
 
   async ngOnInit() {
@@ -19,7 +21,13 @@ export class SongPrintComponent implements OnInit {
   }
 
   async ngOnChanges() {
-   
+    
+    //re-retrieve the song for printing so we can modify parsing without messing up the display
+    let p = await (this.songService.getSong(this.song.summary));
+
+    p.parse(95);
+
+    this.printSong = p;
   }
 
   back() {

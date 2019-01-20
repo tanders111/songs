@@ -1,7 +1,7 @@
 <div class="">
   <div class="row">
     <div class="col">
-      <pre>{{song?.header?.join('\n')}}</pre>
+      <pre>{{printSong?.header?.join('\n')}}</pre>
 
     </div>
 
@@ -14,7 +14,7 @@
   </div>
   <hr class="mt-0 mb-1 bg-white"/>
 
-  <ng-container *ngFor="let b of song?.blocks; let i = index">
+  <ng-container *ngFor="let b of printSong?.blocks; let i = index">
 
     <div class="row" *ngIf="i % 2 == 0" style="page-break-after: always">
 
@@ -23,9 +23,9 @@
         <div style="height:auto; width: auto; display: block; overflow:visible;"><pre>{{b.lines.join('\n')}}</pre></div>
       </div>
 
-      <div class="col" *ngIf="song.blocks.length > 1" style="overflow:visible">
+      <div class="col" *ngIf="printSong.blocks.length > 1" style="overflow:visible">
           <span  *ngIf="showBlocks">{{i+1}}</span>
-        <pre *ngIf="song.blocks[i + 1]">{{song.blocks[i+1].lines.join('\n')}} </pre>
+        <pre *ngIf="printSong.blocks[i + 1]">{{printSong.blocks[i+1].lines.join('\n')}} </pre>
       </div>
 
     </div>

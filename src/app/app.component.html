@@ -14,5 +14,5 @@
 </div>
 
 <div  *ngIf="printing" class="container-fluid" style=" height: calc(99vh); overflow: visible;">
-    <song-print [song]=song (done)="printing = false"></song-print>
+    <song-print [song]="song" (done)="printing = false"></song-print>
 </div>

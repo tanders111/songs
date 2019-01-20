@@ -1,13 +1,19 @@
 
-sc stop songs
+@echo off
+echo ------------------- run the following commmands to deploy 
+echo ------------------- running the bat file does not work because all commands after webpack do not execute
+
 
 set deployroot=c:\tmp\deploy\songs
 
-webpack --config webpack-server.config.js
+echo sc stop songs
 
-move /Y dist\bundle-server.js  %deployroot%
+echo webpack --config webpack-server.config.js
 
-ng build --prod  --outputPath %deployroot%/client
+echo move /Y dist\bundle-server.js  %deployroot%
 
-sc start songs
+echo ng build --prod  --outputPath %deployroot%/client
+
+echo sc start songs
+
 

@@ -8,9 +8,12 @@ Run the node server using F5
 or from command line:  node  ..path/server/index.js  [port:3002]  
 see launch.json for setting server port = 3002
 
-the angular service changes the server port to 3002 if app was served from localhost:4200
+start client app using a proxy to route server requests coming in on port 4200 to port 3002
+run npm start which is configure to run ng-serve like this:
+ng serve  --proxy-config proxy.conf.json
 
-originally main.ts set the port on the client to 3002 if the config is hmr
+
+with proxy there is no need for the angular service to change the server port to 3002 if app was served from localhost:4200
 
 
 prod mode
