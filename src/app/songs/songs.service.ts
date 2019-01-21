@@ -79,7 +79,7 @@ export class Song {
   parse(maxLines: number = undefined) : Song
   {
     let lines = this.lines;
-    maxLines = maxLines || (window.innerHeight -50) / 13;
+    maxLines = maxLines || (window.innerHeight - 100) / 25;
     var parsed: Song = new Song();
 
   	var isheader = true;
