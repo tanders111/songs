@@ -41,18 +41,19 @@ pre {
 @media print {
     
     pre {
-    
-        font-size: x-small;
         border-width: 0px;
         background-color: white;
         color: black;
     }
-    
-    .songFrame { margin-left: 50px;}
-    
-    .singlePre {
-      font-size: 8pt;
-    }
-    
+
     .hidePrint { display: none;}
-    }
+}
+
+.font-60 { font-size: 60%;}
+.font-80 { font-size: 80%;}
+.font-100 { font-size: 100%;}
+.font-120 { font-size: 120%;}
+.font-140 { font-size: 140%;}
+.font-160 { font-size: 160%;}
+.font-180 { font-size: 180%;}
+.font-200 { font-size: 200%; }

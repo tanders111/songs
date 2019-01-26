@@ -3,3 +3,10 @@ pre {
     background-color: white;
     overflow: visible;
  }
+
+
+
+@media not print {
+    .print-container {border: 1px solid gray;  width: 1063px; padding-left: 50px; overflow: hidden;} 
+
+ }

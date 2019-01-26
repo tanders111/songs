@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output , OnChanges, EventEmitter} from '@angular/core';
-import { SongsService, SongSummary, Song, Block} from './songs.service';
+import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
+import { SongsService, SongSummary, Song, Block, Zoom } from './songs.service';
 import { parse } from 'querystring';
 
 @Component({
@@ -10,24 +10,28 @@ import { parse } from 'querystring';
 export class SongPrintComponent implements OnInit {
 
   @Input() song: Song;
-  @Output() done: EventEmitter<boolean>  = new EventEmitter<boolean>();
+  @Output() done: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   printSong: Song;
+  singleColumn = false;
+  zoom: Zoom;
 
   constructor(private songService: SongsService) { }
 
   async ngOnInit() {
-   
+
   }
 
   async ngOnChanges() {
-    
+    await this.refresh();
+  }
+
+  async refresh() {
     //re-retrieve the song for printing so we can modify parsing without messing up the display
     let p = await (this.songService.getSong(this.song.summary));
-
-    p.parse(95);
-
     this.printSong = p;
+    this.zoom = new Zoom(p);
+    this.zoom.parse();
   }
 
   back() {
@@ -37,5 +41,6 @@ export class SongPrintComponent implements OnInit {
   print() {
     window.print();
   }
+
 }
 

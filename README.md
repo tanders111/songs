@@ -15,6 +15,8 @@ ng serve  --proxy-config proxy.conf.json
 
 with proxy there is no need for the angular service to change the server port to 3002 if app was served from localhost:4200
 
+to edit text files in create a link to them:
+mklink /J files C:\Users\Todd\Documents\music\songs
 
 prod mode
 ---------

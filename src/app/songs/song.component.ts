@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, Input, Output , OnChanges, EventEmitter, ElementRef, ViewChild, HostListener} from '@angular/core';
-import { SongsService, SongSummary, Song, Block} from './songs.service';
+import { SongsService, SongSummary, Song, Block, Zoom} from './songs.service';
 import { parse } from 'querystring';
 
 @Component({
@@ -13,8 +13,11 @@ export class SongComponent implements OnInit {
   @Input() songSummary: SongSummary;
   @Output() onPrint: EventEmitter<Song> = new EventEmitter<Song>();
 
-  song: any;
+  song: Song;
+  zoom: Zoom;
 
+  singleColumn: boolean = false;
+  
   constructor(private songService: SongsService) { }
 
   async ngOnInit() {
@@ -22,7 +25,7 @@ export class SongComponent implements OnInit {
   }
 
   async ngOnChanges() {
-      setTimeout(async () => await this.refresh());
+      await this.refresh();
   }
 
   async refresh() {
@@ -30,6 +33,11 @@ export class SongComponent implements OnInit {
       if (!this.songSummary) return;
 
       this.song = await this.songService.getSong(this.songSummary);
+
+      this.zoom = new Zoom(this.song, false);
+
+      this.zoom.parse();
+
       console.info('got song from ' + this.songSummary.file, this.song)
 
       } catch (e) {
