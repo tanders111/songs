@@ -1,12 +1,12 @@
 <div class="container-fluid p-0"  *ngIf="!printing"  style=" height: calc(100vh); overflow: none;">
 
-    <div class=" d-inline-block " style="width: 260px;  height: calc(99vh); overflow: auto; overflow-x: hidden;">
+    <div class=" d-inline-block" *ngIf="!hideSearch" style="width: 260px;  height: calc(99vh); overflow: auto; overflow-x: hidden;">
         <songs (onSongSelected)="selectSong($event)"></songs>
     </div>
    
 
     <div class="ez-read d-inline-block p-3" style=" height: calc(99vh); overflow: auto;">
-        <song *ngIf="selectedSong" (onPrint)="print($event)" [songSummary]=selectedSong></song>
+        <song *ngIf="selectedSong" (onPrint)="print($event)" (onSearchToggle)="toggleSearch($event)" [songSummary]=selectedSong></song>
     </div>
 
    

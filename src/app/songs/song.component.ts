@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, Output , OnChanges, EventEmitter, ElementRef, ViewChild, HostListener} from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output , OnChanges, EventEmitter, NgZone, ViewChild, HostListener} from '@angular/core';
 import { SongsService, SongSummary, Song, Block, Zoom} from './songs.service';
 import { parse } from 'querystring';
 
@@ -12,13 +12,16 @@ export class SongComponent implements OnInit {
   
   @Input() songSummary: SongSummary;
   @Output() onPrint: EventEmitter<Song> = new EventEmitter<Song>();
+  @Output() onSearchToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   song: Song;
   zoom: Zoom;
 
   singleColumn: boolean = false;
+  hideSearch: boolean = false;
   
-  constructor(private songService: SongsService) { }
+  constructor(private songService: SongsService,
+    private zone: NgZone) { }
 
   async ngOnInit() {
    
@@ -56,6 +59,12 @@ export class SongComponent implements OnInit {
   print() {
     this.onPrint.emit(this.song);
     //window.print();
+  }
+
+  async toggleSearch() {
+    this.hideSearch = !this.hideSearch;
+    this.onSearchToggle.emit(this.hideSearch);
+    this.zone.run(() => {});
   }
 }
 

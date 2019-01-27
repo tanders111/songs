@@ -14,6 +14,7 @@ export class AppComponent {
   selectedSong: SongSummary;
   printing: boolean;
   song: Song;
+  hideSearch = false;
 
   constructor ( ) {}
 
@@ -28,5 +29,10 @@ export class AppComponent {
 
     this.printing = true;
     //setTimeout(() => window.print());
+  }
+
+  toggleSearch(b: boolean) {
+    this.hideSearch = b;
+    console.log('tooge', b);
   }
 }

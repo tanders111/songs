@@ -37,7 +37,7 @@ copy bundle-server.js to deploy-root
 build the client
 
 ng build --prod  --outputPath %deployroot/client
-e.g.  ng build --prod  --outputPath %deployroot%/client
+e.g.  ng build --prod  --outputPath c:/tmp/deploy/songs/client
 
 run the server:
 

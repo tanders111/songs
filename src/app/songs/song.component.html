@@ -1,8 +1,16 @@
-<div class="ez-read" style="width: calc(100vw - 320px)" #detailDiv>
+<div class="ez-read" [ngClass]="[hideSearch ? 'full-width' : 'search-width']" >
   <div class="row">
+    
+    <div class="col-auto">
+      <i 
+      (click)="toggleSearch()" 
+      class="fa fa-fw" [ngClass]="[hideSearch ? 'fa-arrow-right' : 'fa-arrow-left']" 
+      placement="bottom"
+      ngbTooltip="toggle search list"></i>
+    </div>
+
     <div class="col">
       <pre>{{song?.header?.join('\n')}}</pre>
-
     </div>
 
     <div class="col-auto">
