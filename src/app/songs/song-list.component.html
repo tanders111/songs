@@ -5,8 +5,16 @@
       <div class="input-group-prepend">
         <span class="input-group-text"><i class="fa fa-fw fa-search"></i></span>
       </div>
-      <input type="text" class="form-control" [(ngModel)]="song" [ngbTypeahead]="search" [resultFormatter]="formatter"
-        [inputFormatter]="formatter" (selectItem)="selectItem($event)" placeholder="Search" />
+      <input 
+      (click)="$event.target.select()"
+      type="text" 
+      class="form-control" 
+        [(ngModel)]="song"
+         [ngbTypeahead]="search"
+          [resultFormatter]="formatter"
+        [inputFormatter]="formatter" 
+        (selectItem)="selectItem($event)" 
+        placeholder="Search" />
     </div>
     
     <div class="bg-white pl-1" *ngFor="let s of songs; let i = index;" >

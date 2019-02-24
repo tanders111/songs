@@ -104,8 +104,9 @@ export class Song {
   				header.push(line);
   			}
   		} else {
-  			var br = line.indexOf("@br") > -1;
-  			if (br || currentBlock.lines.length > maxLines) {
+        var br = line.indexOf("@br") > -1;
+        if  (br) line = '';//don't need manual breaks anymore
+  			if (currentBlock.lines.length > maxLines) {
   				currentBlock = new Block();
   				blocks.push(currentBlock);
   			}

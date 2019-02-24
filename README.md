@@ -9,7 +9,7 @@ or from command line:  node  ..path/server/index.js  [port:3002]
 see launch.json for setting server port = 3002
 
 start client app using a proxy to route server requests coming in on port 4200 to port 3002
-run npm start which is configure to run ng-serve like this:
+from cmd prompt   [root]>npm run start which is configure to run ng-serve like this:
 ng serve  --proxy-config proxy.conf.json
 
 

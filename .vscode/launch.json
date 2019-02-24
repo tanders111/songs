@@ -7,8 +7,15 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "node server",
             "program": "${workspaceFolder}/src/server/index.js", "args": ["port:3002"]
+        },
+
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "chrome",
+            "url": "http://localhost:4200"
         }
     ]
 }

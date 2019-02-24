@@ -2,11 +2,7 @@
   <div class="row">
     
     <div class="col-auto">
-      <i 
-      (click)="toggleSearch()" 
-      class="fa fa-fw" [ngClass]="[hideSearch ? 'fa-arrow-right' : 'fa-arrow-left']" 
-      placement="bottom"
-      ngbTooltip="toggle search list"></i>
+      <i  (click)="toggleSearch()"  class="fa fa-fw" [ngClass]="[hideSearch ? 'fa-arrow-right' : 'fa-arrow-left']" ></i>
     </div>
 
     <div class="col">
@@ -15,13 +11,13 @@
 
     <div class="col-auto">
 
-        <i class="fa fa-fw fa-search-plus mr-2" (click)="zoom.in()"></i>
-        <i class="fa fa-fw fa-search-minus mr-5" (click)="zoom.out()"></i>
+        <i class="fa fa-fw fa-search-plus mr-4" (click)="zoom.in()"></i>
+        <i class="fa fa-fw fa-search-minus mr-4" (click)="zoom.out()"></i>
     
 
-      <i class="fa fa-fw mr-2" [ngClass]="[singleColumn ? 'fa-text-width' : 'fa-text-height']" (click)="singleColumn=!!!singleColumn"></i>
+      <i class="fa fa-fw mr-4" [ngClass]="[singleColumn ? 'fa-text-width' : 'fa-text-height']" (click)="singleColumn=!!!singleColumn"></i>
 
-      <i class="fa fa-fw fa-print ml-2" (click)=print()></i>
+      <i class="fa fa-fw fa-print" (click)=print()></i>
     </div>
   </div>
   <hr class="mt-0 mb-1 bg-white"/>
