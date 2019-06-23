@@ -13,6 +13,8 @@ echo webpack --config webpack-server.config.js
 echo move /Y dist\bundle-server.js  %deployroot%
 
 echo ng build --prod  --outputPath %deployroot%/client
+echo or use npx to use the local version of angular cli
+echo npx ng build --prod  --outputPath %deployroot%/client
 
 echo sc start songs
 
