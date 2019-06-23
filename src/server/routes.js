@@ -3,7 +3,7 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 
-var home = '/Users/Todd/Documents/music/songs'; //'files';
+var home = '/dev/songs/files'; //'files';
 
 router.get('/songs/:name', function (req, res, next) {
 
