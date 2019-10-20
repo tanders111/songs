@@ -12,6 +12,7 @@ start client app using a proxy to route server requests coming in on port 4200 t
 from cmd prompt   [root]>npm run start which is configure to run ng-serve like this:
 ng serve  --proxy-config proxy.conf.json
 
+from the browser go to  http://localhost:4200
 
 with proxy there is no need for the angular service to change the server port to 3002 if app was served from localhost:4200
 
