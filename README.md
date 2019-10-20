@@ -1,8 +1,8 @@
 # Songs
 
 
-development & debug
---------------------
+## development & debug
+
 ```
 Run the node server using F5 
 or from command line:  node  ..path/server/index.js  [port:3002]  
@@ -21,7 +21,7 @@ mklink /J files C:\Users\Todd\OneDrive\Todd\music\songs
 ```
 
 
-prod mode
+## prod mode
 
 ```
 Running the server in prod mode
@@ -50,17 +50,18 @@ node bundle-server.js
 the node server will look for static files in 'client' directory and default is index.html
 ```
 
-setting up the windows service
+## setting up the windows service
 ```
 to edit the service name is songs:
 nssm edit songs
 
+make sure console box is unchecked on process tab!!!!!!
 
 path     = C:\Program Files\nodejs\node.exe
 startdir = c:\tmp\deploy\songs
 arguments= bundle-server.js
 logs redirected to c:\tmp\log\songs.out|err.log
-make sure console box is unchecked on process tab!!!!!!
+
 ```
 
 
