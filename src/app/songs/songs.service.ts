@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+export  { Zoom } from './zoom';
 
 @Injectable({
   providedIn: 'root'
@@ -33,12 +34,17 @@ export class SongsService {
     return `${this.root}/${path}`;
   }
 
+  songs: SongSummary[];
+  song: SongSummary;
+
   getSongs(): Promise<SongSummary[]> {
 
-    let o = this.httpClient.get<SongSummary[]>(this.url('songs'));
+    let o = this.httpClient.get<SongSummary[]>(this.url('songs'))
+    .pipe(
+      tap(r => this.songs = r)
+    );
 
     return o.toPromise();
-
   }
 
   getSong(summary: SongSummary): Promise<Song> {
@@ -57,6 +63,43 @@ export class SongsService {
 
     return o.toPromise();
   }
+
+  filterSongs(term: string, max = 15):  SongSummary[] {
+    if (term.length < 1) return [];
+        
+    if (term.length === 1) return this.songs.filter(v => v.title.toLowerCase().startsWith(term.toLowerCase())).slice(0, max);
+       
+    return this.songs.filter(song => SongsService.matchesToken(song, term.toLowerCase())).slice(0, max);
+  }
+
+  static matchesToken(s: SongSummary, t: string): boolean {
+    if (s.title.toLowerCase().indexOf(t) > -1) return true;
+
+    let found = s.searchTokens.find(tkn => tkn.toLowerCase().indexOf(t) > -1);
+    return !!found;
+  }
+
+  onSongSelected: EventEmitter<SongSummary> = new EventEmitter<SongSummary>()
+  
+  private localKey: string = 'lastSong';
+
+  selectSong(song: SongSummary = undefined) {
+    
+    if (!song) {
+      let file = localStorage.getItem(this.localKey);
+
+      if (this.songs.length) {
+        let ls = this.songs.find(sng => sng.file === file);
+        song = ls || this.songs[0];
+      }
+    }
+    this.song = song;
+    localStorage.setItem(this.localKey, song.file);
+    this.onSongSelected.emit(song);
+
+  }
+
+
 }
   
 
@@ -134,71 +177,3 @@ export class SongLines
    lines: string[]
    name: string
  };
-
- export class Zoom {
-
-  constructor(
-    private song: Song, 
-    private printing: boolean = true) 
-  { }
-
-  zoom: number = 100;
-  max: number = 200;
-  min: number = 60;
-  fontClass: string[] = ['font-100'];
-
-  in() {
-    if (this.zoom + 20 <= this.max) {
-      this.zoom += 20;
-      this.fontClass = [`font-${this.zoom}`];
-    }
-    this.parse();
-  }
-
-  out() {
-    if (this.zoom - 20 >= this.min) {
-      this.zoom -= 20;
-      this.fontClass = [`font-${this.zoom}`];
-    }
-    this.parse();
-  }
-
-  parse() {
-
-    let linesPerPage = 58;
-
-    let zoom = this.zoom;
-    if (this.printing) { 
-
-      if (zoom === 60) linesPerPage =  90;
-      if (zoom === 80) linesPerPage =  80;
-      if (zoom === 100) linesPerPage = 60;
-      if (zoom === 120) linesPerPage = 50;
-      if (zoom === 140) linesPerPage = 40;
-      if (zoom === 160) linesPerPage = 40;
-      if (zoom === 180) linesPerPage = 30;
-      if (zoom === 200) linesPerPage = 20;
-    } else {
-      linesPerPage = this.calcLines();
-    }
-    this.song.parse(linesPerPage);
-  }
-
-  private calcLines() : number {
-     let height = window.innerHeight - 130;  //pixels height of song frame
-
-     let zoom = this.zoom;
-     let linesPerPage = 50;
-
-     if (zoom === 60) linesPerPage = height * 0.0732323232323232;
-     if (zoom === 80) linesPerPage = height * 0.0542929292929293;
-     if (zoom === 100) linesPerPage = height * 0.0429292929292929;
-     if (zoom === 120) linesPerPage = height * 0.0366161616161616;
-     if (zoom === 140) linesPerPage = height * 0.0315656565656566;
-     if (zoom === 160) linesPerPage = height * 0.0265151515151515;
-     if (zoom === 180) linesPerPage = height * 0.023989898989899;
-     if (zoom === 200) linesPerPage = height * 0.0214646464646465;
-     
-     return linesPerPage;
-  }
-}

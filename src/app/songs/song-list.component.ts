@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { SongsService, SongSummary } from './songs.service';
 import { Observable, pipe } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
@@ -10,40 +10,31 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 })
 export class SongListComponent implements OnInit {
 
-  songs: SongSummary[];
-  song: SongSummary;
+  @Input() showList = true;
+  @Input() showSelect = false;
 
-  @Output() onSongSelected: EventEmitter<SongSummary> = new EventEmitter<SongSummary>()
+  @Output() onSongSelected: EventEmitter<SongSummary>;
 
-  constructor(private httpClient: SongsService) { }
+  get songs(): SongSummary[] { 
+    return this.songService.songs; 
+  };
+
+  get song(): SongSummary {
+    return this.songService.song;
+  };
+
+ 
+  constructor(private songService: SongsService) {
+    this.onSongSelected = this.songService.onSongSelected;
+   }
 
   async ngOnInit() {
-    await this.getSongs();
+    await this.songService.getSongs();
+    this.songService.selectSong();
   }
 
-  async getSongs() {
-    let list = await this.httpClient.getSongs();
-    this.songs = list;
-
-    let s = localStorage.getItem(this.localKey);
-
-    if (list.length) {
-      let ls = list.find(sng => sng.file === s);
-      let selected = ls || list[0];
-      this.selectSong(selected);
-    }
-  }
-
-  selectItem(selected: any) {
-    //from typeahead
-    this.selectSong(selected.item)
-  }
-
-  selectSong(s: SongSummary) {
-    this.song = s;
-    localStorage.setItem(this.localKey, s.file);
-    this.onSongSelected.emit(s);
-
+  selectItem(selected: any) {console.log('selected', selected);
+    this.songService.selectSong(selected.item)
   }
 
   formatter = (sum: SongSummary) => sum.title;
@@ -52,35 +43,24 @@ export class SongListComponent implements OnInit {
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(term => {
-        let max = 15;
-        if (term.length < 1) return [];
-        if (term.length === 1) return this.songs.filter(v => v.title.toLowerCase().startsWith(term.toLowerCase())).slice(0, max);
-        return this.songs.filter(song => this.matchesToken(song, term.toLowerCase())).slice(0, max);
-      }
-      )
+      map(term => this.songService.filterSongs(term))
     )
 
-  matchesToken(s: SongSummary, t: string): boolean {
-    if (s.title.toLowerCase().indexOf(t) > -1) return true;
-
-    let found = s.searchTokens.find(tkn => tkn.toLowerCase().indexOf(t) > -1);
-    return !!found;
-  }
 
   up() {
     let songs = this.songs;
     let idx = songs.findIndex(s => s === this.song);
 
-    if (idx > 0) this.selectSong(songs[idx -1]);
+    if (idx > 0) this.songService.selectSong(songs[idx -1]);
    }
     
    down() {
     let songs = this.songs;
     let idx = songs.findIndex(s => s === this.song);
-    if (idx > this.songs.length) this.song = songs[0];
-    else this.selectSong(songs[idx + 1]);
+    
+    if (idx > this.songs.length) this.songService.selectSong(this.songs[0])
+    else this.songService.selectSong(songs[idx + 1]);
   }
 
-  private localKey: string = 'lastSong';
+  
 }

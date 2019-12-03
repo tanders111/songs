@@ -9,6 +9,8 @@ $primary: #2885c5;
 
 $font-family-base: "Helvetica Neue", "Roboto", Helvetica, Arial, sans-serif;
 
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 @import '../node_modules/font-awesome/scss/font-awesome';
 
 //@import "../../node_modules/surescripts-glue/src/scss/_custom.scss"; //custom variables overrides before processing bootstrap components.
@@ -58,5 +60,5 @@ pre {
 .font-180 { font-size: 180%;}
 .font-200 { font-size: 200%; }
 
-.search-width { width: calc(100vw - 320px); }
+.search-width { width: calc(100vw - 290px); }
 .full-width { width: calc(100vw - 40px); }

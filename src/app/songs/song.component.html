@@ -1,23 +1,44 @@
-<div class="ez-read" [ngClass]="[hideSearch ? 'full-width' : 'search-width']" >
+<div class=" d-inline-block" *ngIf="!hideSearch" style="width: 260px;  height: calc(99vh); vertical-align: top; overflow: auto; overflow-x: hidden;">
+  <songs></songs>
+</div>
+
+<div class="ez-read d-inline-block p-2" [ngClass]="[hideSearch ? 'full-width' : 'search-width']" 
+(dblclick)="ui.tools = !!!ui.tools"
+style=" height: calc(99vh);">
   <div class="row">
-    
+  
     <div class="col-auto">
-      <i  (click)="toggleSearch()"  class="fa fa-fw" [ngClass]="[hideSearch ? 'fa-arrow-right' : 'fa-arrow-left']" ></i>
+      <div *ngIf="showSelect" class="d-inline-block" [ngClass]="zoom?.compact ? 'compact-select' : 'full-select'">
+        <ng-select [items]="songs"
+                 bindLabel="title"
+                 [clearable]="false"
+                 [searchFn]="songMatches"
+                 [dropdownPosition]="'bottom'"
+                 [ngModel]="songSummary" (ngModelChange)="songSelected($event)">
+      </ng-select>
+      </div >
     </div>
 
-    <div class="col">
-      <pre>{{song?.header?.join('\n')}}</pre>
+    <div class="col" *ngIf="!zoom?.compact">
+      <pre [ngClass]="zoom?.fontClass">{{song?.header?.join('\n')}}</pre>
     </div>
 
     <div class="col-auto">
 
+      <ng-container *ngIf="!zoom?.compact || ui.tools">
         <i class="fa fa-fw fa-search-plus mr-4" (click)="zoom.in()"></i>
+                
         <i class="fa fa-fw fa-search-minus mr-4" (click)="zoom.out()"></i>
-    
 
-      <i class="fa fa-fw mr-4" [ngClass]="[singleColumn ? 'fa-text-width' : 'fa-text-height']" (click)="singleColumn=!!!singleColumn"></i>
+        <i class="fa fa-fw mr-4" [ngClass]="[singleColumn ? 'fa-text-width' : 'fa-text-height']" (click)="singleColumn=!!!singleColumn"></i>
+      </ng-container>
 
-      <i class="fa fa-fw fa-print" (click)=print()></i>
+      <ng-container *ngIf="!zoom?.compact">
+        <i  (click)="toggleSearch()"  class="fa fa-fw mr-4" [ngClass]="[hideSearch ? 'fa-arrow-right' : 'fa-arrow-left']" ></i>
+        <i class="fa fa-fw fa-print mr-4" *ngIf="!zoom?.compact" (click)=print()></i>
+      </ng-container>
+<!--
+      <i class="fa fa-fw fa-ellipsis-v mr-4 float-right" (click)="ui.tools = !!!ui.tools"></i>-->
     </div>
   </div>
   <hr class="mt-0 mb-1 bg-white"/>
@@ -42,7 +63,8 @@
         <pre [ngClass]="zoom.fontClass">{{b.text}}</pre>
       </div>
     </div>
-
+<!--
     <hr style="background-color: white" *ngIf="song?.blocks.length > 2 && (i % 2 == 0)  && !singleColumn">
+    -->
   </ng-container>
 </div>

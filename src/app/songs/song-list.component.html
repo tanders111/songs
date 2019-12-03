@@ -1,5 +1,5 @@
 
-  <div class="" (keyup.arrowup)="up();$event.stopPropagation()" (keyup.arrowdown)="down()">
+  <div *ngIf="showList" class="" (keyup.arrowup)="up();$event.stopPropagation()" (keyup.arrowdown)="down()">
 
     <div class="input-group input-group-sm">
       <div class="input-group-prepend">
@@ -9,16 +9,16 @@
       (click)="$event.target.select()"
       type="text" 
       class="form-control" 
-        [(ngModel)]="song"
-         [ngbTypeahead]="search"
-          [resultFormatter]="formatter"
+        [ngModel]="song"
+        [ngbTypeahead]="search"
+        [resultFormatter]="formatter"
         [inputFormatter]="formatter" 
         (selectItem)="selectItem($event)" 
         placeholder="Search" />
     </div>
     
     <div class="bg-white pl-1" *ngFor="let s of songs; let i = index;" >
-      <a class="list-group-item" href="javascript:void(0)" (click)="selectSong(s)" [class.active]="s==song">
+      <a class="list-group-item" href="javascript:void(0)" (click)="selectItem({item: s})" [class.active]="s==song">
         {{s.title}}
       </a>
     </div>

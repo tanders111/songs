@@ -1,38 +1,40 @@
-import { Component } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
-import {SongSummary, Song} from './songs/songs.service'
+import { Component, OnInit } from '@angular/core';
+import {SongSummary, Song, SongsService} from './songs/songs.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: `app.component.html`,
   styles: []
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
 
-  songs: SongSummary[];
-  selectedSong: SongSummary;
+
+  get selectedSong(): SongSummary {
+    return this.songService.song;
+  }
+
   printing: boolean;
   song: Song;
   hideSearch = false;
 
-  constructor ( ) {}
+  constructor (private songService: SongsService ) {}
+
+  ngOnInit() {
+    this.songService.getSongs()
+    .then(r => {
+      console.log('songs loaded');
+      this.songService.selectSong();
+    });
+    
+  }
 
   title = 'songs';
 
-  selectSong(summary: SongSummary) {
-    this.selectedSong = summary;
-  }
-
+  
   print(song: Song) {
     this.song = song;
 
     this.printing = true;
-    //setTimeout(() => window.print());
-  }
-
-  toggleSearch(b: boolean) {
-    this.hideSearch = b;
-    console.log('tooge', b);
   }
 }

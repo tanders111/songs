@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { SongsService, SongSummary, Song, Block, Zoom } from './songs.service';
-import { parse } from 'querystring';
 
 @Component({
   selector: 'song-print',

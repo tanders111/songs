@@ -1,44 +1,67 @@
 import { Component, OnInit, AfterViewInit, Input, Output, OnChanges, EventEmitter, NgZone, ViewChild, HostListener } from '@angular/core';
 import { SongsService, SongSummary, Song, Block, Zoom } from './songs.service';
-import { parse } from 'querystring';
 import { fromEvent } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'song',
   templateUrl: './song.component.html',
-  styleUrls: []
+  styles: [
+    `.compact-select {width: 100%}
+    .full-select {width: 260px;}
+    `]
 })
 export class SongComponent implements OnInit {
 
 
-  @Input() songSummary: SongSummary;
-  @Output() onPrint: EventEmitter<Song> = new EventEmitter<Song>();
-  @Output() onSearchToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  @Output() onPrint: EventEmitter<Song> = new EventEmitter<Song>();
+  
+  showSelect = true;
+  
   song: Song;
+  ui: any = {}
+
+  get songs() : SongSummary[] {
+    return this.songService.songs;
+  }
+
+  get songSummary() : SongSummary {
+    return this.songService.song;
+  }
+
   zoom: Zoom;
 
   singleColumn: boolean = false;
-  hideSearch: boolean = false;
+  hideSearch: boolean = true;
 
   constructor(private songService: SongsService,
     private zone: NgZone) { }
 
   async ngOnInit() {
 
+    this.songService.onSongSelected.subscribe(s => this.refresh()
+    .then(r => console.log('refreshed')));
+
     fromEvent(window, 'resize')
         .pipe(
             debounceTime(500)
         )
-        .subscribe((val) => this.zoom.parse());
+        .subscribe((val) => this.zoom.parse());  
   }
 
+  songMatches(term: string, item: any) {
+    return SongsService.matchesToken(item, term);
+  }
+
+  dim() {
+    return window.innerHeight + 'x' + window.innerWidth;
+  }
   async ngOnChanges() {
     await this.refresh();
   }
 
-  async refresh() {
+  private async refresh() {
     try {
       if (!this.songSummary) return;
 
@@ -56,6 +79,10 @@ export class SongComponent implements OnInit {
     }
   }
 
+  async songSelected(song: SongSummary) {
+    this.songService.selectSong(song);
+    await this.refresh().then(x => console.log('refreshed'));
+  }
 
   @HostListener('window:resize', ['$event'])
   async screenChanged() {
@@ -72,7 +99,6 @@ export class SongComponent implements OnInit {
 
   async toggleSearch() {
     this.hideSearch = !this.hideSearch;
-    this.onSearchToggle.emit(this.hideSearch);
     this.zone.run(() => { });
   }
 }
