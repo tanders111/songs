@@ -9,6 +9,7 @@ import { map, debounceTime } from 'rxjs/operators';
   styles: [
     `.compact-select {width: 100%}
     .full-select {width: 260px;}
+    body { background-color: #556}
     `]
 })
 export class SongComponent implements OnInit {

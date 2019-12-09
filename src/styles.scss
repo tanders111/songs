@@ -26,16 +26,20 @@ a:not([href]):not([tabindex]) {
 
 .ez-read {
 
-    color: white;
-    background-color: midnightblue;
 }
 
+@media not print {
+    body {
+    color: white;
+    background-color: rgb(19, 15, 48);
+}
+}
 
 pre {
 
     color: white;
     border-width: 0px;
-    background-color: midnightblue;
+   // background-color: midnightblue;
     font-size: 12pt;
 	padding: 0px;
 }
