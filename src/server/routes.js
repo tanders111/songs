@@ -46,7 +46,7 @@ function getSearchTokens(fileName) {
 
   for (var i in res) {
     var x = res[i].trim().toLowerCase();
-    if (!r[x] && x.length > 2) {
+    if (!r[x] && x.length > 2 && !blacktokens[x]) {
       r[x] = 1;
       r.searchTokens.push(x);
     }
@@ -61,6 +61,10 @@ var getSongLines = function (song) {
   var lines = txt.replace(/\n/g, "^^^").replace(/\r/g, "").split("^^^");
 
   return lines;
+}
+
+var blacktokens = {
+  the: true, and: true, its: true
 }
 
 module.exports = router;

@@ -64,12 +64,19 @@ export class SongsService {
     return o.toPromise();
   }
 
-  filterSongs(term: string, max = 15):  SongSummary[] {
-    if (term.length < 1) return [];
-        
-    if (term.length === 1) return this.songs.filter(v => v.title.toLowerCase().startsWith(term.toLowerCase())).slice(0, max);
-       
-    return this.songs.filter(song => SongsService.matchesToken(song, term.toLowerCase())).slice(0, max);
+  filterSongs(term: string, max = 15): SongSummary[] {
+    if (term.length < 1)
+      return this.songs;
+
+    if (term.length === 1)
+      return this.songs.filter(v => v.title.toLowerCase().startsWith(term)).slice(0, max);
+
+    let starts = this.songs.filter(v => v.title.toLowerCase().startsWith(term));
+    let not = this.songs.filter(v => !v.title.toLowerCase().startsWith(term) && SongsService.matchesToken(v, term));
+    let songs = starts.concat(not);
+    //console.log('starts', starts.length, 'not', not.length, 'songst', songs.length, 'this', this.songs.length);
+    //this.songs.filter(song => SongsService.matchesToken(song, term))
+    return songs.slice(0, max);
   }
 
   static matchesToken(s: SongSummary, t: string): boolean {

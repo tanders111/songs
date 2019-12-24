@@ -9,14 +9,10 @@
   
     <div class="col">
       <div *ngIf="showSelect">
-        <ng-select [items]="songs"
-                 bindLabel="title"
-                 [clearable]="false"
-                 [searchFn]="songMatches"
-                 [dropdownPosition]="'bottom'"
-                 [ngModel]="songSummary" (ngModelChange)="songSelected($event)">
-      </ng-select>
+        <songs [showList]="false"></songs>
+        <!-- <ng-select [items]="searchSongs() | async"  bindLabel="title"   [clearable]="false"  [searchFn]="songMatches"  [dropdownPosition]="'bottom'"   [ngModel]="songSummary" (ngModelChange)="songSelected($event)">      </ng-select>  -->
       </div >
+     
     </div>
 
     <div class="col" *ngIf="!zoom?.compact">
