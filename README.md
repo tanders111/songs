@@ -1,22 +1,22 @@
 # Songs
 
 
-## development & debug
+## development & debug using node server
 
 ```
 Run the node server using F5 
 or from command line:  node  ..path/server/index.js  [port:3002]  
 see launch.json for setting server port = 3002
 
-start client app using a proxy to route server requests coming in on port 4200 to port 3002
+start client app using a proxy to route server requests coming in on port 4209 to port 3002
 from cmd prompt   [root]>npm run start which is configure to run ng-serve like this:
-ng serve  --proxy-config proxy.conf.json
+ng serve --port 4209 --proxy-config proxy.conf.json
 
-from the browser go to  http://localhost:4200
+from the browser go to  http://localhost:4209
 
-with proxy there is no need for the angular service to change the server port to 3002 if app was served from localhost:4200
+with proxy there is no need for the angular service to change the server port to 3002 if app was served from localhost:4205
 
-to edit text files in create a link to them:
+to edit text files in vscode create a link to them:
 mklink /J files C:\Users\Todd\Documents\music\songs
 mklink /J files C:\Users\Todd\OneDrive\Todd\music\songs
 ```

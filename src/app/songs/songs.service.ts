@@ -113,6 +113,8 @@ export class SongsService {
 export class SongSummary {
   title?: string;
   artist?: string;
+  bpm?: string;
+  note?: string;
   file?: string;
   searchTokens?: string[];
 };
@@ -121,10 +123,24 @@ export class SongSummary {
 export class Song {
 
   summary: SongSummary;
-  header: string[] = [];
+  get header(): string[] {
+    let s = this.summary;
+    if (s == null) 
+      return this.parsedHeader;
+
+    let rv = [];
+    let line = `${s.artist || ''} ${s.bpm || ''} ${s.note || ''}`.trim();
+    if (!line.length)
+      return this.parsedHeader;
+      
+    rv.push(line);
+    return rv;
+  }
+
   blocks: Block[] = [];
 
   lines: string[];
+  private parsedHeader: string[];
 
   parse(maxLines: number = undefined) : Song
   {
@@ -164,7 +180,7 @@ export class Song {
   		}
   		idx++;
   	}
-  	this.header = header;
+  	this.parsedHeader = header;
     this.blocks = blocks;
 
   	return parsed;

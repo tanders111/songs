@@ -2,15 +2,15 @@
   <songs></songs>
 </div>
 
-<div class="ez-read d-inline-block p-2" [ngClass]="[hideSearch ? 'full-width' : 'search-width']" 
+<div class="ez-read d-inline-block p-2" 
+    [ngClass]="[hideSearch ? 'full-width' : 'search-width']" 
       (dblclick)="ui.tools = !!!ui.tools"
       style=" height: calc(99vh);">
   <div class="row">
   
     <div class="col">
       <div *ngIf="showSelect">
-        <songs [showList]="false"></songs>
-        <!-- <ng-select [items]="searchSongs() | async"  bindLabel="title"   [clearable]="false"  [searchFn]="songMatches"  [dropdownPosition]="'bottom'"   [ngModel]="songSummary" (ngModelChange)="songSelected($event)">      </ng-select>  -->
+        <songs [showList]="false"></songs>      
       </div >
      
     </div>
@@ -20,7 +20,6 @@
     </div>
 
     <div class="col-auto"  *ngIf="!zoom?.compact || ui.tools" [ngClass]="{ 'p-0': zoom?.compact}">
-
       <ng-container>
         <i class="fa fa-fw fa-search-plus mr-4" (click)="zoom.in()"></i>
                 
