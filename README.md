@@ -4,17 +4,16 @@
 ## development & debug using node server
 
 ```
-Run the node server using F5 
-or from command line:  node  ..path/server/index.js  [port:3002]  
-see launch.json for setting server port = 3002
+Run the dotnet server using F5 
+ 
+see launch.json for setting hosturls = need to http://locahost:5080,http://0.0.0.0:5080 so localhost launches and accessible from other ips
 
-start client app using a proxy to route server requests coming in on port 4209 to port 3002
-from cmd prompt   [root]>npm run start which is configure to run ng-serve like this:
-ng serve --port 4209 --proxy-config proxy.conf.json
+start client app using port 4205
+from cmd prompt   [root]\ClientApp>npm run start
+which is configure to run ng serve like this:  ng serve --port 4205 
 
-from the browser go to  http://localhost:4209
+from the browser go to  http://localhost:5080
 
-with proxy there is no need for the angular service to change the server port to 3002 if app was served from localhost:4205
 
 to edit text files in vscode create a link to them:
 mklink /J files C:\Users\Todd\Documents\music\songs
@@ -27,28 +26,12 @@ mklink /J files C:\Users\Todd\OneDrive\Todd\music\songs
 ```
 Running the server in prod mode
 
-The port for prod is 3001
+see deploy-songs.ps1 for build
 
-see deploy-songs.bat
-
-build the server bundle
-
-webpack --config webpack-server.config.js
-
-puts bundle-server.js in dist directory
-
-copy bundle-server.js to deploy-root
+To run from commandline   Songs.Web.Exe --hosturls "http://0.0.0.0:3080"
 
 build the client
 
-ng build --prod  --outputPath %deployroot/client
-e.g.  ng build --prod  --outputPath c:/tmp/deploy/songs/client
-
-run the server:
-
-node bundle-server.js
-
-the node server will look for static files in 'client' directory and default is index.html
 ```
 
 ## setting up the windows service
@@ -58,9 +41,11 @@ nssm edit songs
 
 make sure console box is unchecked on process tab!!!!!!
 
-path     = C:\Program Files\nodejs\node.exe
-startdir = c:\tmp\deploy\songs
-arguments= bundle-server.js
+root = published app   
+
+path     = root\Songs.Web.exe
+startdir = root
+arguments= --hosturls http://0.0.0.0:3080
 logs redirected to c:\tmp\log\songs.out|err.log
 
 ```

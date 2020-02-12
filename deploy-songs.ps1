@@ -2,23 +2,24 @@
 # To allow local scripts OR remote signed scripts
 # Set-ExecutionPolicy -ExecutionPolicy RemoteSigned"   
 
-Start-Process -FilePath "webpack" -Wait  -ArgumentList "--config webpack-server.config.js" 
+Start-Process -FilePath "dotnet" -Wait  -ArgumentList "publish -c Release" 
 
-Write-Host "webpack complete"
+Write-Host "publish complete"
 
-robocopy files dist\files /MIR
-xcopy /Y dist-package.json dist\package.json
+Set-Location "Songs.Web/ClientApp" 
 
-npx ng build --prod  --outputPath dist/client
+npx ng build --prod  --outputPath ..\bin\Release\netcoreapp3.1\ClientApp\dist
 
-Stop-Service -name songs
+robocopy ..\..\files ..\bin\Release\netcoreapp3.1\publish\files
 
-$deployroot = "c:\tmp\deploy\songs"
+Stop-Service -name song
+
+$deployroot = "c:\tmp\deploy\song"
 
 Write-Host $deployroot
 
-robocopy dist $deployroot /MIR
+robocopy ..\bin\Release\netcoreapp3.1\publish $deployroot /MIR
 
-Start-Service -name songs
+Start-Service -name song
 
 
