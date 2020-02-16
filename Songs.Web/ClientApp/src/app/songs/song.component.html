@@ -1,71 +1,68 @@
-<div class=" d-inline-block" *ngIf="!hideSearch" style="width: 260px;  height: calc(99vh); vertical-align: top; overflow: auto; overflow-x: hidden;">
-  <songs></songs>
+<div class=" d-inline-block" *ngIf="!hideList"
+  style="width: 260px;  height: calc(99vh); vertical-align: top; overflow: auto; overflow-x: hidden;">
+  <song-list></song-list>
 </div>
 
-<div class="ez-read d-inline-block p-2" 
-    [ngClass]="[hideSearch ? 'full-width' : 'search-width']" 
-      (dblclick)="ui.tools = !!!ui.tools"
-      style=" height: calc(99vh);">
-  <div class="row">
-  
-    <div class="col">
-      <div *ngIf="showSelect">
-        <songs [showList]="false"></songs>      
-      </div >
-     
+<div class="ez-read d-inline-block p-2" [ngClass]="[hideList ? 'full-width' : 'search-width']"  style=" height: calc(99vh);">
+
+  <div class="row mb-1">
+
+    <div class="col" (dblclick)="ui.tools = !!!ui.tools;" >
+      <song-search></song-search>
     </div>
 
     <div class="col" *ngIf="!zoom?.compact">
       <pre [ngClass]="zoom?.fontClass" style="overflow: none; word-break: break-all;">{{song?.header?.join('\n')}}</pre>
     </div>
 
-    <div class="col-auto"  *ngIf="!zoom?.compact || ui.tools" [ngClass]="{ 'p-0': zoom?.compact}">
-      <ng-container>
+    <div class="col-auto" *ngIf="!zoom?.compact || ui.tools" [ngClass]="{ 'p-0': zoom?.compact}">
         <i class="fa fa-fw fa-search-plus mr-4" (click)="zoom.in()"></i>
-                
+
         <i class="fa fa-fw fa-search-minus mr-4" (click)="zoom.out()"></i>
 
-        <i class="fa fa-fw mr-4" [ngClass]="[singleColumn ? 'fa-text-width' : 'fa-text-height']" (click)="singleColumn=!!!singleColumn"></i>
-      </ng-container>
+        <i class="fa fa-fw mr-4" [ngClass]="[singleColumn ? 'fa-text-width' : 'fa-text-height']"
+          *ngIf="!zoom?.compact"
+          (click)="singleColumn=!!!singleColumn"></i>
 
-      <ng-container *ngIf="!zoom?.compact">
-        <i  (click)="toggleSearch()"  class="fa fa-fw mr-4" [ngClass]="[hideSearch ? 'fa-arrow-right' : 'fa-arrow-left']" ></i>
-        <i class="fa fa-fw fa-print mr-4" *ngIf="!zoom?.compact" (click)=print()></i>
-      </ng-container>
-<!--
-      <i class="fa fa-fw fa-ellipsis-v mr-4 float-right" (click)="ui.tools = !!!ui.tools"></i>-->
+      <i class="fa fa-fw fa-print" *ngIf="!zoom?.compact" (click)=print()></i>
+
     </div>
   </div>
-  <hr class="mt-0 mb-1"/>
 
-  <ng-container *ngIf="singleColumn || song?.blocks.length === 1">
+  <div (dblclick)="toggleHideList()" >
 
-    <div class="row">
+    <ng-container *ngIf="singleColumn || song?.blocks.length === 1">
 
-      <div class="col">
-        <div  *ngFor="let b of song?.blocks"><pre class="m-0"  [ngClass]="zoom.fontClass">{{b.text}}</pre></div>
-      </div>
-    </div>
+      <div class="row">
 
-  </ng-container>
-
-  <ng-container *ngIf="!singleColumn">
-  
-    <ng-container *ngFor="let b of song?.blocks; let i = index">
-      
-      <div class="row" *ngIf="i % 2 == 0">
-  
         <div class="col">
-          <pre [ngClass]="zoom.fontClass">{{b.text}}</pre>
+          <div *ngFor="let b of song?.blocks">
+            <pre class="m-0" [ngClass]="zoom.fontClass">{{b.text}}</pre>
+          </div>
         </div>
-  
-        <div class="col">
-          <pre [ngClass]="zoom.fontClass" >{{song.blocks[i+1]?.text}}</pre>
-        </div>
-  
       </div>
-  
-      <hr style="background-color: white" *ngIf="song?.blocks.length > 2 && (i % 2 == 0)  && !singleColumn">
+
     </ng-container>
-  </ng-container>
+
+    <ng-container *ngIf="!singleColumn">
+
+      <ng-container *ngFor="let b of song?.blocks; let i = index">
+
+        <div class="row" *ngIf="i % 2 == 0">
+
+          <div class="col">
+            <pre [ngClass]="zoom.fontClass">{{b.text}}</pre>
+          </div>
+
+          <div class="col">
+            <pre [ngClass]="zoom.fontClass">{{song.blocks[i+1]?.text}}</pre>
+          </div>
+
+        </div>
+
+        <hr style="background-color: white" *ngIf="song?.blocks.length > 2 && (i % 2 == 0)  && !singleColumn">
+      </ng-container>
+
+    </ng-container>
+  </div>
 </div>

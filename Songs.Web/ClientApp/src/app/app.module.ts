@@ -10,10 +10,11 @@ import { GlobalErrorHandler } from './shared/global-error-handler'
 import { SongComponent } from './songs/song.component';
 import { SongPrintComponent } from './songs/song-print.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SongSearchComponent } from './songs/song-search.component';
 
 @NgModule({
   declarations: [
-    AppComponent, SongListComponent, SongComponent, SongPrintComponent
+    AppComponent, SongListComponent, SongComponent, SongPrintComponent, SongSearchComponent
   ],
   imports: [
     BrowserModule,

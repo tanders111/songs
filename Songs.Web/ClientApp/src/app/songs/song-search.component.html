@@ -1,0 +1,14 @@
+
+
+  <div class="input-group input-group-sm">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-fw fa-search"></i></span>
+    </div>
+    <input (click)="$event.target.select()" type="text" class="form-control" 
+      [ngModel]="song" [ngbTypeahead]="search"
+      [resultFormatter]="formatter" 
+      [inputFormatter]="formatter" 
+      (selectItem)="selectItem($event)"
+      placeholder="Search" />
+  </div>
+

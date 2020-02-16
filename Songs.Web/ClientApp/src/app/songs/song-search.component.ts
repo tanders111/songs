@@ -4,14 +4,11 @@ import { Observable, pipe } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'song-list',
-  templateUrl: './song-list.component.html',
-  styleUrls: ['./song-list.component.scss']
+  selector: 'song-search',
+  templateUrl: './song-search.component.html',
+  styleUrls: []
 })
-export class SongListComponent implements OnInit {
-
-  @Input() showList = true;
-  @Input() showSelect = false;
+export class SongSearchComponent implements OnInit {
 
   @Output() onSongSelected: EventEmitter<SongSummary>;
 
@@ -45,22 +42,5 @@ export class SongListComponent implements OnInit {
       distinctUntilChanged(),
       map(term => this.songService.filterSongs(term))
     )
-
-
-  up() {
-    let songs = this.songs;
-    let idx = songs.findIndex(s => s === this.song);
-
-    if (idx > 0) this.songService.selectSong(songs[idx -1]);
-   }
-    
-   down() {
-    let songs = this.songs;
-    let idx = songs.findIndex(s => s === this.song);
-    
-    if (idx > this.songs.length) this.songService.selectSong(this.songs[0])
-    else this.songService.selectSong(songs[idx + 1]);
-  }
-
   
 }

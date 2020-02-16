@@ -14,12 +14,8 @@ import { map, debounceTime } from 'rxjs/operators';
 })
 export class SongComponent implements OnInit {
 
-
-
   @Output() onPrint: EventEmitter<Song> = new EventEmitter<Song>();
-  
-  showSelect = true;
-  
+
   song: Song;
   ui: any = {}
 
@@ -34,7 +30,7 @@ export class SongComponent implements OnInit {
   zoom: Zoom;
 
   singleColumn: boolean = false;
-  hideSearch: boolean = true;
+  hideList: boolean = true;
 
   constructor(private songService: SongsService,
     private zone: NgZone) { }
@@ -72,6 +68,8 @@ export class SongComponent implements OnInit {
 
       this.zoom.parse();
 
+      this.singleColumn = this.zoom.compact;
+
       console.info('got song from ' + this.songSummary.file, this.song)
 
     } catch (e) {
@@ -98,8 +96,8 @@ export class SongComponent implements OnInit {
     //window.print();
   }
 
-  async toggleSearch() {
-    this.hideSearch = !this.hideSearch;
+  async toggleHideList() {
+    this.hideList = !this.hideList;
     this.zone.run(() => { });
   }
 }
