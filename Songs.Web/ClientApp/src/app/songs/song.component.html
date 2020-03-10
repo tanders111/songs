@@ -11,10 +11,11 @@
       <song-search></song-search>
     </div>
 
-    <div class="col" *ngIf="!zoom?.compact">
+    <div class="col" *ngIf="!zoom?.compact || ui.tools">
       <pre [ngClass]="zoom?.fontClass" style="overflow: none; word-break: break-all;">{{song?.header?.join('\n')}}</pre>
     </div>
-
+  
+  
     <div class="col-auto" *ngIf="!zoom?.compact || ui.tools" [ngClass]="{ 'p-0': zoom?.compact}">
         <i class="fa fa-fw fa-search-plus mr-4" (click)="zoom.in()"></i>
 

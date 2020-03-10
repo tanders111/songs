@@ -17,19 +17,6 @@ export class SongsService {
 
   private root = "api";
 
-  private getRootTheOldWay() : string {
-    let host = window.location.host;
-
-    let port = '3001';
-
-    if (host.indexOf('4200') > 0) 
-      port = '3002';
-
-    host = host.replace('4200', port);
-
-    return `http://${host}/api`;
-  }
-
   url(path: string) {
     return `${this.root}/${path}`;
   }

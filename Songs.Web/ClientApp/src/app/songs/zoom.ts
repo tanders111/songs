@@ -9,9 +9,9 @@ export class Zoom {
       private song: Song, 
       private printing: boolean = true) 
     { 
-      this.dim = window.outerWidth * window.outerHeight;
+      this.dim = window.innerWidth * window.innerHeight;
       this.compact = this.dim < 300000; 
-
+      console.log(`*****compact ${this.compact}  h=${window.innerHeight} w=${window.innerWidth} d=${this.dim}`);
       if (this.compact) {
         this.zoom = this.min;
         this.fontClass=[`font-${this.zoom}`];

@@ -26,7 +26,7 @@ mklink /J files C:\Users\Todd\OneDrive\Todd\music\songs
 ```
 Running the server in prod mode
 
-see deploy-songs.ps1 for build
+see songs.ps1 for build
 
 To run from commandline   Songs.Web.Exe --hosturls "http://0.0.0.0:3080"
 
