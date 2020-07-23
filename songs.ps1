@@ -43,7 +43,12 @@ function deployAll() {
 }
 
 function usage() {
-    Write-Host "Usage:  songs env | client | deploy"
+    Write-Host ""
+    Write-Host "Usage:  songs env | client | deploy | files"
+    Write-Host ""
+    Write-Host "files:  copies the song text files"
+    Write-Host "client: builds angular app  and copeis  files"
+    Write-Host "deploy: server + client + files"
 }
 
 $root = Get-Location;
