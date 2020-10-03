@@ -4,6 +4,7 @@ export class Zoom {
 
     dim: number;
     compact: boolean;
+    ipadDimensions = 3145728 + 1; //2048 * 1536
 
     constructor(
       private song: Song, 
@@ -11,6 +12,11 @@ export class Zoom {
     { 
       this.dim = window.innerWidth * window.innerHeight;
       this.compact = this.dim < 300000; 
+      if (this.dim < this.ipadDimensions) {
+        this.zoom = 80;
+        this.fontClass = [`font-${this.zoom}`];
+      }
+
       console.log(`*****compact ${this.compact}  h=${window.innerHeight} w=${window.innerWidth} d=${this.dim}`);
       if (this.compact) {
         this.zoom = this.min;

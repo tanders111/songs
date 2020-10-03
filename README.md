@@ -9,7 +9,7 @@ Run the dotnet server using F5
 see launch.json for setting hosturls = need to http://locahost:5080,http://0.0.0.0:5080 so localhost launches and accessible from other ips
 
 start client app using port 4205
-from cmd prompt   [root]\ClientApp>npm run start
+from cmd prompt   ....Songs.Web\ClientApp>npm start
 which is configure to run ng serve like this:  ng serve --port 4205 
 
 from the browser go to  http://localhost:5080
