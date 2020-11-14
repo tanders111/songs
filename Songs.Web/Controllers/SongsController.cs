@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel;
+using System.Globalization;
 using System.Net.Mime;
 using System;
 using System.Text;
@@ -64,9 +65,12 @@ namespace Songs.Web.Controllers
         {
             var songPath = io.Path.Combine(Home, fileName);
             var txt = io.File.ReadAllText(songPath, Encoding.UTF8);
+
+            new List<string> { "\n", "\r", ".", ",", "\"", "(", ")"}.ForEach(s => txt = txt.Replace(s, " "));
+
             var txtSansLines = Regex.Replace(txt, @"\s+", " ");
 
-            var tokens = GetSearchTokens(txt);
+            var tokens = GetSearchTokens(txt.Trim());
 
             var headerLength = txtSansLines.IndexOf("---");
             
@@ -124,7 +128,10 @@ namespace Songs.Web.Controllers
                     !blackTokens.Contains(word)
                 )
                 {
-                    searchTokens.Add(word);
+                    var ignore = false;
+                    ignoreContains.ForEach(ic => ignore = ignore || word.Contains(ic, StringComparison.OrdinalIgnoreCase));
+                    if (!ignore)
+                        searchTokens.Add(word);
                 }
             }
 
@@ -155,6 +162,16 @@ namespace Songs.Web.Controllers
             "has"
         };
 
+        private static List<string> ignoreContains = new List<string>
+        {
+            "--",
+            "[",
+            "]",
+            "|",
+            "#",
+            "7",
+            "/"
+        };
     }
 
 

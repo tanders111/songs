@@ -37,6 +37,13 @@ namespace Songs.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            /*
+            var s = new Songs.Web.Controllers.SongsController(null, env).GetSongs();
+            var h = Newtonsoft.Json.JsonConvert.SerializeObject(s
+            , Newtonsoft.Json.Formatting.Indented
+            );
+            System.IO.File.WriteAllText(@"c:\tmp\songs.json", h);
+            */
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

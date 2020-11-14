@@ -23,7 +23,7 @@ function buildClient() {
 }
 
 function copySongFiles() {
-    robocopy $root\files $deployroot\files /MIR  
+    robocopy $songroot $deployroot\files /MIR  
 }
 function deployAll() {
     Start-Process -FilePath "dotnet" -Wait  -ArgumentList "publish -c Release" 
@@ -35,8 +35,7 @@ function deployAll() {
     Stop-Service -name song -ErrorAction Stop
     WaitUntilServices "song" "Stopped"
 
-    robocopy $pubroot\files $root\files  /MIR  
-    robocopy $pubroot $deployroot /MIR
+    copySongFiles
 
     Start-Service -name song
     WaitUntilServices "song" "Running"
@@ -56,6 +55,7 @@ $root = Get-Location;
 $deployroot = "c:\tmp\deploy\song"
 $pubroot = Join-Path $root "Songs.Web\bin\Release\netcoreapp3.1\publish"
 $clientroot = Join-Path $root "Songs.Web\ClientApp"
+$songroot = "C:\Users\Todd\OneDrive\Todd\music\songs"
 
 if (!(Test-Path "songs.sln")) {
     $defaultRoot = "c:/dev/songs"

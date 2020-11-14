@@ -55,6 +55,8 @@ export class SongsService {
     if (term.length < 1)
       return this.songs;
 
+    term = term.toLowerCase();
+    
     if (term.length === 1)
       return this.songs.filter(v => v.title.toLowerCase().startsWith(term)).slice(0, max);
 
