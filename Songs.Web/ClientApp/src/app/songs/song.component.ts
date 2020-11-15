@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, Input, Output, OnChanges, EventEmitte
 import { SongsService, SongSummary, Song, Block, Zoom } from './songs.service';
 import { fromEvent } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
+import { Icons } from '../icons';
 
 @Component({
   selector: 'song',
@@ -18,6 +19,7 @@ export class SongComponent implements OnInit {
 
   song: Song;
   ui: any = {}
+  icons = new Icons();
 
   get songs() : SongSummary[] {
     return this.songService.songs;
@@ -38,7 +40,7 @@ export class SongComponent implements OnInit {
   async ngOnInit() {
 
     this.songService.onSongSelected.subscribe(s => this.refresh()
-    .then(r => console.log('refreshed')));
+      .then(r => console.log('refreshed')));
 
     fromEvent(window, 'resize')
         .pipe(

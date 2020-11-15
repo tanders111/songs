@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
+import { Icons } from '../icons';
 import { SongsService, SongSummary, Song, Block, Zoom } from './songs.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class SongPrintComponent implements OnInit {
   printSong: Song;
   singleColumn = false;
   zoom: Zoom;
+  icons = new Icons();
 
   constructor(private songService: SongsService) { }
 

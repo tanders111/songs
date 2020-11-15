@@ -11,6 +11,9 @@ import { SongComponent } from './songs/song.component';
 import { SongPrintComponent } from './songs/song-print.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SongSearchComponent } from './songs/song-search.component';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { faBinoculars, faPrint, faSearchPlus, faSearchMinus, faTextHeight, faTextWidth, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ import { SongSearchComponent } from './songs/song-search.component';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    NgSelectModule
+    NgSelectModule,
+    FontAwesomeModule
   ],
   providers: [
     {
@@ -32,6 +36,13 @@ import { SongSearchComponent } from './songs/song-search.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  constructor(library: FaIconLibrary) {
+    library.addIcons(
+      faBinoculars, faPrint, faSearchPlus, faSearchMinus, faTextHeight, faTextWidth, faSearch
+    );
+  }
+}
 
 

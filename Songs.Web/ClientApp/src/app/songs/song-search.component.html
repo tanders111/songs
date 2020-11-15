@@ -2,7 +2,7 @@
 
   <div class="input-group input-group-sm">
     <div class="input-group-prepend">
-      <span class="input-group-text"><i class="fa fa-fw fa-search"></i></span>
+      <span class="input-group-text"><fa-icon [icon]="icons.faSearch"></fa-icon></span>
     </div>
     <input (click)="$event.target.select()" type="text" class="form-control" 
       [ngModel]="song" [ngbTypeahead]="search"

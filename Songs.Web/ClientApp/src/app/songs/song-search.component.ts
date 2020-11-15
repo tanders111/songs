@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { SongsService, SongSummary } from './songs.service';
 import { Observable, pipe } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Icons } from '../icons';
 
 @Component({
   selector: 'song-search',
@@ -12,6 +13,8 @@ export class SongSearchComponent implements OnInit {
 
   @Output() onSongSelected: EventEmitter<SongSummary>;
 
+  icons = new Icons();
+  
   get songs(): SongSummary[] { 
     return this.songService.songs; 
   };

@@ -9,19 +9,29 @@
 
     <div class="col-auto">
       <div class="hidePrint">
-          
+    
         <button class="btn btn-sm btn-secondary mr-2" (click)=back()>Cancel Preview</button>
-            <i class="fa fa-fw fa-search-plus mr-2" (click)="zoom.in()"></i>
-            <i class="fa fa-fw fa-search-minus mr-5" (click)="zoom.out()"></i>
-         
-            <i class="fa fa-fw mr-5" [ngClass]="[singleColumn ? 'fa-text-width' : 'fa-text-height']" (click)="singleColumn=!!!singleColumn"></i>
-
-            <i class="fa fa-fw fa-print" (click)=print()></i>
-            
-            
-       </div>
+    
+        <span class="mr-2" (click)="zoom.in()">
+          <fa-icon [icon]="icons.faSearchPlus"></fa-icon>
+        </span>
+    
+        <span class="mr-2" (click)="zoom.out()">
+          <fa-icon [icon]="icons.faSearchMinus"></fa-icon>
+        </span>
+    
+        <span class="mr-5" (click)="singleColumn=!!!singleColumn">
+          <fa-icon *ngIf="singleColumn" [icon]="singleColumn ? icons.faTextWidth : icons.faTextHeight"></fa-icon>
+        </span>
+    
+        <span class="mr-2" (click)="print()">
+          <fa-icon [icon]="icons.faPrint"></fa-icon>
+        </span>
+    
+      </div>
     </div>
   </div>
+  
   <hr class="mt-0 mb-1 bg-white"/>
 
   <ng-container *ngFor="let b of printSong?.blocks; let i = index">
