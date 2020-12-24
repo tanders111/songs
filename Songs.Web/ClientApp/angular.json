@@ -62,7 +62,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -79,20 +78,6 @@
                   "maximumWarning": "6kb"
                 }
               ]
-            },
-            "hmr": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.hmr.ts"
-                }
-              ]
             }
           }
         },
@@ -104,10 +89,6 @@
           "configurations": {
             "production": {
               "browserTarget": "songs:build:production"
-            },
-            "hmr": {
-              "hmr": true,
-              "browserTarget": "songs:build:hmr"
             }
           }
         },

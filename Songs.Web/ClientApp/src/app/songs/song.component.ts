@@ -34,12 +34,15 @@ export class SongComponent implements OnInit {
   singleColumn: boolean = false;
   hideList: boolean = true;
 
-  constructor(private songService: SongsService,
-    private zone: NgZone) { }
+  constructor(
+    private songService: SongsService,
+    private zone: NgZone
+  ) { }
 
   async ngOnInit() {
 
-    this.songService.onSongSelected.subscribe(s => this.refresh()
+    this.songService.onSongSelected
+      .subscribe(s => this.refresh()
       .then(r => console.log('refreshed')));
 
     fromEvent(window, 'resize')
@@ -49,16 +52,10 @@ export class SongComponent implements OnInit {
         .subscribe((val) => this.zoom.parse());  
   }
 
-  songMatches(term: string, item: any) {
-    return SongsService.matchesToken(item, term);
-  }
-
   dim() {
     return window.innerHeight + 'x' + window.innerWidth;
   }
-  async ngOnChanges() {
-    await this.refresh();
-  }
+ 
 
   private async refresh() {
     try {
@@ -72,7 +69,7 @@ export class SongComponent implements OnInit {
 
       this.singleColumn = this.zoom.compact;
 
-      console.info('got song from ' + this.songSummary.file, this.song)
+      console.info('loaded ' + this.songSummary.file, this.song)
 
     } catch (e) {
       console.error('error getting song ', e);

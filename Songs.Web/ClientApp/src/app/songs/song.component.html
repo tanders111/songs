@@ -32,7 +32,7 @@
     
     
     
-      <span *ngIf="!zoom?.compact">
+      <span *ngIf="!zoom?.compact" (click)="print()">
         <fa-icon [icon]="icons?.faPrint"></fa-icon>
       </span>
     
@@ -55,7 +55,7 @@
 
     </ng-container>
 
-    <ng-container *ngIf="!singleColumn">
+    <ng-container *ngIf="!singleColumn && song?.blocks.length > 1">
 
       <ng-container *ngFor="let b of song?.blocks; let i = index">
 

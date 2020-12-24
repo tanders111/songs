@@ -13,8 +13,6 @@ export class SongListComponent implements OnInit {
   @Input() showList = true;
   @Input() showSelect = false;
 
-  @Output() onSongSelected: EventEmitter<SongSummary>;
-
   get songs(): SongSummary[] { 
     return this.songService.songs; 
   };
@@ -24,9 +22,7 @@ export class SongListComponent implements OnInit {
   };
 
  
-  constructor(private songService: SongsService) {
-    this.onSongSelected = this.songService.onSongSelected;
-   }
+  constructor(private songService: SongsService) { }
 
   async ngOnInit() {
     await this.songService.getSongs();
@@ -58,8 +54,10 @@ export class SongListComponent implements OnInit {
     let songs = this.songs;
     let idx = songs.findIndex(s => s === this.song);
     
-    if (idx > this.songs.length) this.songService.selectSong(this.songs[0])
-    else this.songService.selectSong(songs[idx + 1]);
+     if (idx > this.songs.length)
+       this.songService.selectSong(this.songs[0])
+     else
+       this.songService.selectSong(songs[idx + 1]);
   }
 
   
