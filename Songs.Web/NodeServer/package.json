@@ -1,0 +1,23 @@
+{
+  "name": "songs",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --configuration hmr --port 4205",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "deploy": "ng build --prod  --outputPath c:/tmp/deploy/songs/client",
+    "postinstall": "ngcc"
+  },
+  "private": true,
+  "dependencies": {
+    "core-js": "^2.5.4",
+    "cors": "^2.8.5",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "webpack": "^5.4.0"
+  }
+}

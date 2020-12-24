@@ -23,7 +23,8 @@ function buildClient() {
 }
 
 function copySongFiles() {
-    robocopy $songroot $deployroot\files /MIR  
+    robocopy $songroot $deployroot\files /MIR 
+    robocopy $songroot $pubroot\files /MIR   
 }
 function deployAll() {
     Start-Process -FilePath "dotnet" -Wait  -ArgumentList "publish -c Release" 

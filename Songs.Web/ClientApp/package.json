@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration hmr --port 4205",
-    "build": "ng build",
+    "build": "ng build --prod --outputPath dist",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -32,7 +32,6 @@
     "bootstrap": "^4.5.0",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
-    "express": "^4.16.4",
     "rxjs": "~6.5.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
