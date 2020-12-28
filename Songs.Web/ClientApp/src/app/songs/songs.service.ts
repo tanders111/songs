@@ -1,7 +1,8 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, pipe } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 export  { Zoom } from './zoom';
 
 @Injectable({
@@ -11,7 +12,8 @@ export class SongsService {
 
   constructor
     (
-      private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private injector: Injector
     ) { }
 
 
@@ -21,8 +23,9 @@ export class SongsService {
     return `${this.root}/${path}`;
   }
 
-  songs: SongSummary[];
+  songs: SongSummary[] = [];
   song: SongSummary;
+
 
   getSongs(): Promise<SongSummary[]> {
 
@@ -34,19 +37,29 @@ export class SongsService {
     return o.toPromise();
   }
 
-  getSong(summary: SongSummary): Promise<Song> {
+  songCache: {[file: string]: Observable<Song> } = {};
 
-    let url = this.url(`songs/${summary.file}`);
+  getSongByFile(file: string): Promise<Song> {
 
-    let o = this.httpClient.get<Song>(url).pipe(
-      map(r => {
-        let song = new Song();
-        song.lines = r.lines;
-        song.summary = summary;
-        song.parse()
-        return song;
-      })
-     );
+    file = file || localStorage.getItem(this.localKey);//this.songs[0].file;
+
+    let url = this.url(`songs/${file}`);
+
+    let o = this.songCache[file];
+
+    if (!o) {
+      o = this.httpClient.get<Song>(url).pipe(
+        map(r => {
+          let song = new Song();
+          song.lines = r.lines;
+          song.summary = this.songs ? this.songs.find(s => s.file === file) : undefined;
+          song.parse()
+          return song;
+        })
+      );
+
+      this.songCache[file] = o;
+    }
 
     return o.toPromise();
   }
@@ -75,27 +88,53 @@ export class SongsService {
     return !!found;
   }
 
-  onSongSelected: EventEmitter<SongSummary> = new EventEmitter<SongSummary>()
-  
   private localKey: string = 'lastSong';
 
-  selectSong(song: SongSummary = undefined) {
-    
-    if (!song) {
+  selectSong(summary: SongSummary = undefined) {
+
+    if (!summary) {
+
       let file = localStorage.getItem(this.localKey);
 
-      if (this.songs.length) {
-        let ls = this.songs.find(sng => sng.file === file);
-        song = ls || this.songs[0];
-      }
+      let ls = this.songs.find(sng => sng.file === file);
+      summary = ls || this.songs[0];
     }
-    this.song = song;
-    localStorage.setItem(this.localKey, song.file);
-    this.onSongSelected.emit(song);
 
+    this.song = summary;
+    localStorage.setItem(this.localKey, summary.file);
+    let router = this.injector.get(Router);
+    router.navigate(['/songs', summary.file]);
   }
 
 
+  load() {
+
+    let file = localStorage.getItem(this.localKey);
+
+    return new Promise((resolve, reject) => {
+
+      this.getSongs()
+        .then(r => {
+          
+          if (!file && r && r.length) {
+            file = r[0].file;
+            localStorage.setItem(this.localKey, file);
+          }
+          if (file) {
+            resolve(r);
+          } else {
+            reject('no songs!');
+          }
+          
+        })
+        .catch(e => {
+          console.error('rejected load', e);
+          reject(e);
+        })
+      
+
+    });
+  } 
 }
   
 

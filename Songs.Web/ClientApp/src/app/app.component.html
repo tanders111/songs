@@ -1,11 +1,6 @@
-<div class="container-fluid p-0"  *ngIf="!printing"  style=" height: calc(100vh); overflow: none;"  class="ez-read">
+<div class="container-fluid"
+    [style]="printing ? 'height: calc(99vh); overflow: visible;' : 'height: calc(100vh); overflow: none;'">
 
-    <div class="ez-read">
-        <song (onPrint)="print($event)"></song>
-    </div>
+    <router-outlet></router-outlet>
 
-</div>
-
-<div  *ngIf="printing" class="container-fluid" style=" height: calc(99vh); overflow: visible;">
-    <song-print [song]="song" (done)="printing = false"></song-print>
 </div>

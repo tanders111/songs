@@ -3,6 +3,7 @@ import { SongsService, SongSummary } from './songs.service';
 import { Observable, pipe } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Icons } from '../icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'song-search',
@@ -19,13 +20,11 @@ export class SongSearchComponent implements OnInit {
     return this.songService.songs; 
   };
 
-  get song(): SongSummary {
-    return this.songService.song;
-  };
+  song: SongSummary;
 
- 
-  constructor(private songService: SongsService) {
-    this.onSongSelected = this.songService.onSongSelected;
+
+  constructor(private songService: SongsService, private router: Router) {
+   
    }
 
   async ngOnInit() {
@@ -33,8 +32,11 @@ export class SongSearchComponent implements OnInit {
     this.songService.selectSong();
   }
 
-  selectItem(selected: any) {console.log('selected', selected);
-    this.songService.selectSong(selected.item)
+  selectItem(selected: any) {
+    console.log('selected', selected);
+    this.song = selected.item;
+
+    this.songService.selectSong(this.song);
   }
 
   formatter = (sum: SongSummary) => sum.title;

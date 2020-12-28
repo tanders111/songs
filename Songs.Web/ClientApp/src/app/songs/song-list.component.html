@@ -4,7 +4,7 @@
 
 
   <div class="bg-white pl-1" *ngFor="let s of songs; let i = index;">
-    <a class="list-group-item" href="javascript:void(0)" (click)="selectItem({item: s})" [class.active]="s==song">
+    <a class="list-group-item" href="javascript:void(0)" (click)="selectItem({item: s})" [class.active]="s.file === song?.file">
       {{s?.title}}
     </a>
   </div>

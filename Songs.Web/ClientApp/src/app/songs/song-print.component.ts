@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Icons } from '../icons';
 import { SongsService, SongSummary, Song, Block, Zoom } from './songs.service';
 
@@ -17,26 +18,30 @@ export class SongPrintComponent implements OnInit {
   zoom: Zoom;
   icons = new Icons();
 
-  constructor(private songService: SongsService) { }
+  constructor(private songService: SongsService, private route: ActivatedRoute) { }
 
   async ngOnInit() {
+
+    let file = this.route.snapshot.paramMap.get('file');
+    console.error('file', file), this.route;
+
+    this.song = await this.songService.getSongByFile(file);
+    this.printSong = this.song;
+
+    this.zoom = new Zoom(this.song);
+
+    this.zoom.parse();
 
   }
 
   async ngOnChanges() {
-    await this.refresh();
+
   }
 
-  async refresh() {
-    //re-retrieve the song for printing so we can modify parsing without messing up the display
-    let p = await (this.songService.getSong(this.song.summary));
-    this.printSong = p;
-    this.zoom = new Zoom(p);
-    this.zoom.parse();
-  }
+ 
 
   back() {
-    this.done.emit(true);
+    this.songService.selectSong(this.song.summary);
   }
 
   print() {

@@ -8,12 +8,6 @@ import {SongSummary, Song, SongsService} from './songs/songs.service'
 })
 export class AppComponent implements OnInit {
 
-
-
-  get selectedSong(): SongSummary {
-    return this.songService.song;
-  }
-
   printing: boolean;
   song: Song;
   hideSearch = false;
@@ -30,11 +24,5 @@ export class AppComponent implements OnInit {
   }
 
   title = 'songs';
-
-  
-  print(song: Song) {
-    this.song = song;
-
-    this.printing = true;
-  }
+ 
 }

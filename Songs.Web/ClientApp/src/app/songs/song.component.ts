@@ -3,6 +3,7 @@ import { SongsService, SongSummary, Song, Block, Zoom } from './songs.service';
 import { fromEvent } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
 import { Icons } from '../icons';
+import { ActivatedRoute, CanDeactivate, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'song',
@@ -13,7 +14,7 @@ import { Icons } from '../icons';
     body { background-color: #556}
     `]
 })
-export class SongComponent implements OnInit {
+export class SongComponent implements OnInit, CanDeactivate<SongComponent> {
 
   @Output() onPrint: EventEmitter<Song> = new EventEmitter<Song>();
 
@@ -25,9 +26,11 @@ export class SongComponent implements OnInit {
     return this.songService.songs;
   }
 
-  get songSummary() : SongSummary {
-    return this.songService.song;
+  get songSummary(): SongSummary {
+    return this.song.summary;
   }
+
+  file: string;
 
   zoom: Zoom;
 
@@ -36,14 +39,20 @@ export class SongComponent implements OnInit {
 
   constructor(
     private songService: SongsService,
-    private zone: NgZone
+    private zone: NgZone,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   async ngOnInit() {
 
-    this.songService.onSongSelected
-      .subscribe(s => this.refresh()
-      .then(r => console.log('refreshed')));
+    this.route.params.subscribe(async (p: Params) => {
+      let file = p['file'];
+      this.file = file;
+      await this.refresh(file);
+    });
+    //let file =  this.route.snapshot.paramMap.get('file');
+    
 
     fromEvent(window, 'resize')
         .pipe(
@@ -52,52 +61,33 @@ export class SongComponent implements OnInit {
         .subscribe((val) => this.zoom.parse());  
   }
 
+  private async refresh(file: string) {
+
+    this.song = await this.songService.getSongByFile(file);
+
+    this.zoom = new Zoom(this.song, false);
+
+    this.zoom.parse();
+
+    this.singleColumn = this.zoom.compact;
+  }
+
   dim() {
     return window.innerHeight + 'x' + window.innerWidth;
   }
  
-
-  private async refresh() {
-    try {
-      if (!this.songSummary) return;
-
-      this.song = await this.songService.getSong(this.songSummary);
-
-      this.zoom = new Zoom(this.song, false);
-
-      this.zoom.parse();
-
-      this.singleColumn = this.zoom.compact;
-
-      console.info('loaded ' + this.songSummary.file, this.song)
-
-    } catch (e) {
-      console.error('error getting song ', e);
-      alert('error see log ' + e.message);
-    }
-  }
-
-  async songSelected(song: SongSummary) {
-    this.songService.selectSong(song);
-    await this.refresh().then(x => console.log('refreshed'));
-  }
-
-  @HostListener('window:resize', ['$event'])
-  async screenChanged() {
-    //if we want to change blocks on screen size change
-    let height = window.innerHeight;//console.log('h',height);
-    //await this.refresh();
-
-  }
-
   print() {
-    this.onPrint.emit(this.song);
-    //window.print();
+    if (this.song.summary)
+      this.router.navigate(['print', this.song.summary.file]);
+    else
+      alert('no summary in song');
   }
 
   async toggleHideList() {
     this.hideList = !this.hideList;
     this.zone.run(() => { });
   }
+
+  canDeactivate() { return true; }
 }
 

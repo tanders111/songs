@@ -1,9 +1,9 @@
 <div class=" d-inline-block" *ngIf="!hideList"
   style="width: 260px;  height: calc(99vh); vertical-align: top; overflow: auto; overflow-x: hidden;">
-  <song-list></song-list>
+  <song-list [song]="songSummary"></song-list>
 </div>
 
-<div class="ez-read d-inline-block p-2" [ngClass]="[hideList ? 'full-width' : 'search-width']"  style=" height: calc(99vh);">
+<div class="d-inline-block p-2" [ngClass]="[hideList ? 'full-width' : 'search-width']"  style=" height: calc(99vh);">
 
   <div class="row mb-1">
 

@@ -24,14 +24,11 @@ a:not([href]):not([tabindex]) {
     text-decoration: $link-decoration;
 }
 
-.ez-read {
-
-}
-
 @media not print {
     body {
     color: white;
-    background-color: rgb(19, 15, 48);
+    //background-color: rgb(19, 15, 48);
+    background-color:hsl(235, 80%, 20%);
 }
 }
 

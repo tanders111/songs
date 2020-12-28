@@ -15,28 +15,33 @@ function buildClient() {
     Set-Location $clientroot
 
     New-Item -ItemType Directory -Force -Path $pubroot\ClientApp\dist
+
     npx ng build --prod  --outputPath $pubroot\ClientApp\dist
 
     Write-Host angular build complete
-
-    Set-Location $root
 }
 
 function copySongFiles() {
     robocopy $songroot $deployroot\files /MIR 
     robocopy $songroot $pubroot\files /MIR   
 }
+
 function deployAll() {
-    Start-Process -FilePath "dotnet" -Wait  -ArgumentList "publish -c Release" 
+    
+    Stop-Service -name song -ErrorAction Stop
+
+    Start-Process -FilePath "dotnet" -Wait  -ArgumentList "publish -c Release" -ErrorAction Stop
 
     Write-Host "dotnet publish complete"
 
     buildClient
 
-    Stop-Service -name song -ErrorAction Stop
+    
     WaitUntilServices "song" "Stopped"
 
-    copySongFiles
+    robocopy $songroot $pubroot\files /MIR
+
+    robocopy $pubroot $deployroot
 
     Start-Service -name song
     WaitUntilServices "song" "Running"
@@ -86,8 +91,5 @@ elseif ($args[0] -eq "deploy") {
 else {
     usage
 }
-
-
-    
 
 Set-Location $root
