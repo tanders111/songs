@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, pipe } from 'rxjs';
+import { Observable, of, pipe } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 export  { Zoom } from './zoom';
@@ -28,6 +28,11 @@ export class SongsService {
 
 
   getSongs(): Promise<SongSummary[]> {
+
+    //loaded at startup
+    // if (this.songs) {
+    //   return of(this.songs).toPromise();
+    // }
 
     let o = this.httpClient.get<SongSummary[]>(this.url('songs'))
     .pipe(
@@ -96,8 +101,10 @@ export class SongsService {
 
       let file = localStorage.getItem(this.localKey);
 
-      let ls = this.songs.find(sng => sng.file === file);
-      summary = ls || this.songs[0];
+      if (file) {
+        summary = this.songs.find(sng => sng.file === file);
+      }
+        summary = summary || this.songs[0];
     }
 
     this.song = summary;

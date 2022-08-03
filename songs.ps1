@@ -28,15 +28,32 @@ function copySongFiles() {
 
 function deployAll() {
     
+    Write-Host "initiating sc stop songs"
     Stop-Service -name song -ErrorAction Stop
+    Start-Sleep -Seconds 1
 
+    Write-Host "begin dotnet publish"
+    
     Start-Process -FilePath "dotnet" -Wait  -ArgumentList "publish -c Release" -ErrorAction Stop
 
-    Write-Host "dotnet publish complete"
+    Write-Host "dotnet publish complete.   starting client buid"
 
     buildClient
 
-    
+    Write-Host "client build complete.  waiting for service to stop"
+    WaitUntilServices "song" "Stopped"
+
+    robocopy $songroot $pubroot\files /MIR
+
+    robocopy $pubroot $deployroot /MIR
+
+    Write-Host "deploy complete.  initiating sc start songs"
+
+    Start-Service -name song
+    WaitUntilServices "song" "Running"
+}
+
+function copyDist() {
     WaitUntilServices "song" "Stopped"
 
     robocopy $songroot $pubroot\files /MIR
@@ -87,6 +104,10 @@ elseif ($args[0] -eq "files") {
 elseif ($args[0] -eq "deploy") {
     Write-Host "***   Make sure you are running as administrator or the stop start service will fail"
     deployAll
+}
+elseif ($args[0] -eq "copyDist") {
+    Write-Host "***   Make sure you are running as administrator or the stop start service will fail"
+    copyDist
 }
 else {
     usage

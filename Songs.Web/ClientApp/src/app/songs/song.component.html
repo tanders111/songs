@@ -1,79 +1,87 @@
-<div class=" d-inline-block" *ngIf="!hideList"
-  style="width: 260px;  height: calc(99vh); vertical-align: top; overflow: auto; overflow-x: hidden;">
-  <song-list [song]="songSummary"></song-list>
-</div>
+<div class="row flex-nowrap">
+  <div class="col-auto p-0">
 
-<div class="d-inline-block p-2" [ngClass]="[hideList ? 'full-width' : 'search-width']"  style=" height: calc(99vh);">
-
-  <div class="row mb-1">
-
-    <div class="col" (dblclick)="ui.tools = !!!ui.tools;" >
-      <song-search></song-search>
-    </div>
-
-    <div class="col" *ngIf="!zoom?.compact || ui.tools">
-      <pre [ngClass]="zoom?.fontClass" style="overflow: none; word-break: break-all;">{{song?.header?.join('\n')}}</pre>
-    </div>
-  
-  
-    <div class="col-auto" *ngIf="!zoom?.compact || ui.tools" [ngClass]="{ 'p-0': zoom?.compact}">
-    
-      <span class="mr-4" (click)="zoom.in()">
-        <fa-icon [icon]="icons?.faSearchPlus"></fa-icon>
-      </span>
-    
-      <span class="mr-4" (click)="zoom.out()">
-        <fa-icon [icon]="icons?.faSearchMinus"></fa-icon>
-      </span>
-    
-      <span class="mr-4" (click)="singleColumn=!!!singleColumn" *ngIf="!zoom?.compact">
-        <fa-icon [icon]="singleColumn ? icons.faTextWidth : icons.faTextHeight"></fa-icon>
-      </span>
-    
-    
-    
-      <span *ngIf="!zoom?.compact" (click)="print()">
-        <fa-icon [icon]="icons?.faPrint"></fa-icon>
-      </span>
-    
-    
+    <div *ngIf="!hideList"
+      style="max-width: 260px;  height: calc(99vh); vertical-align: top; overflow: auto; overflow-x: hidden;">
+      <song-list [song]="songSummary"></song-list>
     </div>
   </div>
 
-  <div (dblclick)="toggleHideList()" >
+  <div class="col p-0">
+    <div class="d-inline-block p-2" [ngClass]="[hideList ? 'full-width' : 'search-width']" style=" height: calc(99vh);">
 
-    <ng-container *ngIf="singleColumn || song?.blocks.length === 1">
+      <div class="row mb-1">
 
-      <div class="row">
+        <div class="col" (dblclick)="ui.tools = !!!ui.tools;">
+          <song-search></song-search>
+        </div>
 
-        <div class="col">
-          <div *ngFor="let b of song?.blocks">
-            <pre class="m-0" [ngClass]="zoom.fontClass">{{b.text}}</pre>
-          </div>
+        <div class="col" *ngIf="!zoom?.compact || ui.tools">
+          <pre [ngClass]="zoom?.fontClass"
+            style="overflow: none; word-break: break-all;">{{song?.header?.join('\n')}}</pre>
+        </div>
+
+
+        <div class="col-auto" *ngIf="!zoom?.compact || ui.tools" [ngClass]="{ 'p-0': zoom?.compact}">
+
+          <span class="mr-4" (click)="zoom.in()">
+            <fa-icon [icon]="icons?.faSearchPlus"></fa-icon>
+          </span>
+
+          <span class="mr-4" (click)="zoom.out()">
+            <fa-icon [icon]="icons?.faSearchMinus"></fa-icon>
+          </span>
+
+          <span class="mr-4" (click)="singleColumn=!!!singleColumn" *ngIf="!zoom?.compact">
+            <fa-icon [icon]="singleColumn ? icons.faTextWidth : icons.faTextHeight"></fa-icon>
+          </span>
+
+
+
+          <span *ngIf="!zoom?.compact" (click)="print()">
+            <fa-icon [icon]="icons?.faPrint"></fa-icon>
+          </span>
+
+
         </div>
       </div>
 
-    </ng-container>
+      <div (dblclick)="toggleHideList()">
 
-    <ng-container *ngIf="!singleColumn && song?.blocks.length > 1">
+        <ng-container *ngIf="singleColumn || song?.blocks.length === 1">
 
-      <ng-container *ngFor="let b of song?.blocks; let i = index">
+          <div class="row">
 
-        <div class="row" *ngIf="i % 2 == 0">
-
-          <div class="col">
-            <pre [ngClass]="zoom.fontClass">{{b.text}}</pre>
+            <div class="col">
+              <div *ngFor="let b of song?.blocks">
+                <pre class="m-0" [ngClass]="zoom.fontClass">{{b.text}}</pre>
+              </div>
+            </div>
           </div>
 
-          <div class="col">
-            <pre [ngClass]="zoom.fontClass">{{song.blocks[i+1]?.text}}</pre>
-          </div>
+        </ng-container>
 
-        </div>
+        <ng-container *ngIf="!singleColumn && song?.blocks.length > 1">
 
-        <hr style="background-color: white" *ngIf="song?.blocks.length > 2 && (i % 2 == 0)  && !singleColumn">
-      </ng-container>
+          <ng-container *ngFor="let b of song?.blocks; let i = index">
 
-    </ng-container>
+            <div class="row" *ngIf="i % 2 == 0">
+
+              <div class="col">
+                <pre [ngClass]="zoom.fontClass">{{b.text}}</pre>
+              </div>
+
+              <div class="col">
+                <pre [ngClass]="zoom.fontClass">{{song.blocks[i+1]?.text}}</pre>
+              </div>
+
+            </div>
+
+            <hr style="background-color: white" *ngIf="song?.blocks.length > 2 && (i % 2 == 0)  && !singleColumn">
+          </ng-container>
+
+        </ng-container>
+      </div>
+    </div>
   </div>
 </div>

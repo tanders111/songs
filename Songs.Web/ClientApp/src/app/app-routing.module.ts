@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { NavGuard } from './songs/nav-guard';
 import { SongPrintComponent } from './songs/song-print.component';
 import { SongComponent } from './songs/song.component';
+import { WordComponent } from './words/word.component';
 
 const routes: Routes = [
 
   // { path: '', component: SongComponent }.
+  { path: 'word', component: WordComponent },
   { path: '',  component: SongComponent, pathMatch: 'full' },
   { path: 'songs/:file', component: SongComponent, pathMatch: 'full', canDeactivate: [NavGuard] },
   { path: 'print/:file', component: SongPrintComponent, pathMatch: 'full' },

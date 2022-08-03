@@ -28,8 +28,8 @@ export class SongSearchComponent implements OnInit {
    }
 
   async ngOnInit() {
-    await this.songService.getSongs();
-    this.songService.selectSong();
+    //await this.songService.getSongs();
+    //this.songService.selectSong();
   }
 
   selectItem(selected: any) {

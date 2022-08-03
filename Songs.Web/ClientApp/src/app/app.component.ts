@@ -15,11 +15,11 @@ export class AppComponent implements OnInit {
   constructor (private songService: SongsService ) {}
 
   ngOnInit() {
-    this.songService.getSongs()
-    .then(r => {
-      console.log('songs loaded');
-      this.songService.selectSong();
-    });
+    // this.songService.getSongs()
+    // .then(r => {
+    //   console.log('songs loaded');
+    //   this.songService.selectSong();
+    // });
     
   }
 

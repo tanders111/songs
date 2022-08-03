@@ -1,0 +1,53 @@
+<div>
+ <!-- {{status?.correct}} -->
+  <div class="form-row" *ngIf="correct">
+    <div class="col-auto" *ngFor="let i of [0,1,2,3,4]">
+      <div class="form-group">
+        <label>{{i+1}}</label>
+        <input class="form-control form-control-sm" style="width: 60px; background-color: lightgreen;"
+          [(ngModel)]="correct[i]">
+      </div>
+    </div>
+  </div>
+  <!-- <div class="form-row">
+    <div class="col-auto">
+      <div class="form-group" style="width: 200px">
+        <label>Correct</label>
+        <input class="form-control form-control-sm" [(ngModel)]="status.correct">
+      </div>
+    </div>
+  </div> -->
+<label>Wrong Place</label>
+ <div class="form-row">
+    <div class="col-auto" *ngFor="let i of [0,1,2,3,4]">
+      
+      <div class="form-group">
+        
+        <input class="form-control form-control-sm" style="width: 60px; background-color: lightyellow;"
+          [(ngModel)]="status.wrongPlace[i]">
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-auto">
+      <div class="form-group" style="width: 200px">
+        <label>Does not Have</label>
+        <input class="form-control form-control-sm" [(ngModel)]="status.hasNot">
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <button class="btn btn-outline-primary btn-sm" (click)="go()" class="mr-5">Go</button>
+    <button class="btn btn-secondary btn-sm" (click)="reset()" class="mr-5">Reset</button>
+    <button [routerLink]="['songs']">Songs</button>
+
+  </div>
+
+  <div *ngFor="let w of potential">
+    {{w}}
+  </div>
+
+</div>

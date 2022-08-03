@@ -15,10 +15,11 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 
 import { faBinoculars, faPrint, faSearchPlus, faSearchMinus, faTextHeight, faTextWidth, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { SongsService } from './songs/songs.service';
+import { WordComponent } from './words/word.component';
 
 @NgModule({
   declarations: [
-    AppComponent, SongListComponent, SongComponent, SongPrintComponent, SongSearchComponent
+    AppComponent, SongListComponent, SongComponent, SongPrintComponent, SongSearchComponent, WordComponent
   ],
   imports: [
     BrowserModule,
