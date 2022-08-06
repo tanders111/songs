@@ -4,7 +4,8 @@
     <div class="input-group-prepend">
       <span class="input-group-text"><fa-icon [icon]="icons.faSearch"></fa-icon></span>
     </div>
-    <input (click)="$event.target.select()" type="text" class="form-control" 
+    <!-- <input (click)="$event.target.select()" type="text" class="form-control"  -->
+    <input (click)="selectText($event.target)" type="text" class="form-control"
       [ngModel]="song" [ngbTypeahead]="search"
       [resultFormatter]="formatter" 
       [inputFormatter]="formatter" 

@@ -48,4 +48,8 @@ export class SongSearchComponent implements OnInit {
       map(term => this.songService.filterSongs(term))
     )
   
+  selectText(event: EventTarget) {
+    let h = event as HTMLInputElement;
+    h.select();
+  }
 }

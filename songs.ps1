@@ -16,7 +16,7 @@ function buildClient() {
 
     New-Item -ItemType Directory -Force -Path $pubroot\ClientApp\dist
 
-    npx ng build --prod  --outputPath $pubroot\ClientApp\dist
+    npx ng build --configuration production  --output-path $pubroot\ClientApp\dist
 
     Write-Host angular build complete
 }

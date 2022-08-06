@@ -39,7 +39,7 @@
 
 
           <span *ngIf="!zoom?.compact" (click)="print()">
-            <fa-icon [icon]="icons?.faPrint"></fa-icon>
+            <fa-icon [icon]="icons.faPrint"></fa-icon>
           </span>
 
 
@@ -48,7 +48,7 @@
 
       <div (dblclick)="toggleHideList()">
 
-        <ng-container *ngIf="singleColumn || song?.blocks.length === 1">
+        <ng-container *ngIf="singleColumn || song?.blocks?.length === 1">
 
           <div class="row">
 
@@ -61,7 +61,7 @@
 
         </ng-container>
 
-        <ng-container *ngIf="!singleColumn && song?.blocks.length > 1">
+        <ng-container *ngIf="!singleColumn && song?.blocks?.length > 1">
 
           <ng-container *ngFor="let b of song?.blocks; let i = index">
 
