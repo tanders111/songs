@@ -3,7 +3,7 @@
   <song-search></song-search>
 
 
-  <div class="bg-white pl-1" *ngFor="let s of songs; let i = index;">
+  <div class="bg-white text-primary pl-1" *ngFor="let s of songs; let i = index;">
     <a class="list-group-item" href="javascript:void(0)" (click)="selectItem({item: s})" [class.active]="s.file === song?.file">
       {{s?.title}}
     </a>

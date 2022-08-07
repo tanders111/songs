@@ -10,21 +10,21 @@
     <div class="col-auto">
       <div class="hidePrint">
     
-        <button class="btn btn-sm btn-secondary mr-2" (click)=back()>Cancel Preview</button>
+        <button class="btn btn-sm btn-secondary me-2" (click)=back()>Cancel Preview</button>
     
-        <span class="mr-2" (click)="zoom.in()">
+        <span class="me-2" (click)="zoom.in()">
           <fa-icon [icon]="icons.faSearchPlus"></fa-icon>
         </span>
     
-        <span class="mr-2" (click)="zoom.out()">
+        <span class="me-2" (click)="zoom.out()">
           <fa-icon [icon]="icons.faSearchMinus"></fa-icon>
         </span>
     
-        <span class="mr-5" (click)="singleColumn=!!!singleColumn">
+        <span class="me-5" (click)="singleColumn=!!!singleColumn">
           <fa-icon *ngIf="singleColumn" [icon]="singleColumn ? icons.faTextWidth : icons.faTextHeight"></fa-icon>
         </span>
     
-        <span class="mr-2" (click)="print()">
+        <span class="me-2" (click)="print()">
           <fa-icon [icon]="icons.faPrint"></fa-icon>
         </span>
     

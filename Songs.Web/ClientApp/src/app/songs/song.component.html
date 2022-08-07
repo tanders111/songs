@@ -24,15 +24,15 @@
 
         <div class="col-auto" *ngIf="!zoom?.compact || ui.tools" [ngClass]="{ 'p-0': zoom?.compact}">
 
-          <span class="mr-4" (click)="zoom.in()">
+          <span class="me-4" (click)="zoom.in()">
             <fa-icon [icon]="icons?.faSearchPlus"></fa-icon>
           </span>
 
-          <span class="mr-4" (click)="zoom.out()">
+          <span class="me-4" (click)="zoom.out()">
             <fa-icon [icon]="icons?.faSearchMinus"></fa-icon>
           </span>
 
-          <span class="mr-4" (click)="singleColumn=!!!singleColumn" *ngIf="!zoom?.compact">
+          <span class="me-4" (click)="singleColumn=!!!singleColumn" *ngIf="!zoom?.compact">
             <fa-icon [icon]="singleColumn ? icons.faTextWidth : icons.faTextHeight"></fa-icon>
           </span>
 
