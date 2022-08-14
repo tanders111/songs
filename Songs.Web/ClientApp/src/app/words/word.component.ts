@@ -35,7 +35,7 @@ export class WordComponent implements OnInit {
 
     try {
 
-      this.status.hasNot = this.status.hasNot?.trim().toLowerCase();
+      this.status.hasNot = this.status.hasNot?.trim().toUpperCase();
       this.status.correct = this.status.correct?.trim() ?? '';
       
       let cl = this.correct.map(c => c?.length && c.match(/[a-z]/i) ? c : '-');
