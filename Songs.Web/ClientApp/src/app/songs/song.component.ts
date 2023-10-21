@@ -3,7 +3,7 @@ import { SongsService, SongSummary, Song, Block, Zoom } from './songs.service';
 import { fromEvent } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
 import { Icons } from '../icons';
-import { ActivatedRoute, CanDeactivate, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'song',
@@ -14,7 +14,7 @@ import { ActivatedRoute, CanDeactivate, Params, Router } from '@angular/router';
     body { background-color: #556}
     `]
 })
-export class SongComponent implements OnInit, CanDeactivate<SongComponent> {
+export class SongComponent  implements OnInit {
 
   @Output() onPrint: EventEmitter<Song> = new EventEmitter<Song>();
 
