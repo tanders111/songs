@@ -28,7 +28,7 @@ function copySongFiles() {
 
 function deployAll() {
     
-    Write-Host "initiating sc stop songs"
+    Write-Host "initiating sc stop song"
     Stop-Service -name song -ErrorAction Stop
     Start-Sleep -Seconds 1
 
@@ -75,7 +75,7 @@ function usage() {
 
 $root = Get-Location;
 
-$deployroot = "c:\tmp\deploy\song"
+$deployroot = "c:\dev\deploy\song"
 $pubroot = Join-Path $root "Songs.Web\bin\Release\net60\publish"
 $clientroot = Join-Path $root "Songs.Web\ClientApp"
 $songroot = "C:\Users\Todd\OneDrive\Todd\music\songs"

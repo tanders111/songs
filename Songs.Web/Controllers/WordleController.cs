@@ -94,7 +94,7 @@ namespace Songs.Web.Controllers
 
             var take = potential.Take(200).ToList();
 
-            take.ForEach(t => Console.WriteLine(t));
+            //take.ForEach(t => Console.WriteLine(t));
 
             var bestGuess =
             //Test(status, potential)
@@ -217,9 +217,9 @@ namespace Songs.Web.Controllers
                 {
                     max = total;
                     guess = word;
-                    Console.WriteLine($"new guess is {word} {total}");
+                   // Console.WriteLine($"new guess is {word} {total}");
                 }
-                Console.WriteLine($"total {word} {total}");
+                //Console.WriteLine($"total {word} {total}");
             }
             return guess;
         }
