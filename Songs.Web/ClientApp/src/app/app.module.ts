@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler, APP_INITIALIZER } from '@angular/core';
-import {FormsModule} from '@angular/forms'
+import { FormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,10 +12,9 @@ import { SongPrintComponent } from './songs/song-print.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SongSearchComponent } from './songs/song-search.component';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-import { faBinoculars, faPrint, faSearchPlus, faSearchMinus, faTextHeight, faTextWidth, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { SongsService } from './songs/songs.service';
 import { WordComponent } from './words/word.component';
+import { Icons } from './icons';
 
 @NgModule({
   declarations: [
@@ -45,13 +44,10 @@ import { WordComponent } from './words/word.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 
   constructor(library: FaIconLibrary) {
-    library.addIcons(
-      faBinoculars, faPrint, faSearchPlus, faSearchMinus, faTextHeight, faTextWidth, faSearch
-    );
+    let icons = new Icons().allIcons();
+    library.addIcons(...icons);
   }
 }
-
-
