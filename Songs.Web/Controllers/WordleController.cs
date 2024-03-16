@@ -1,22 +1,7 @@
-﻿using System.Numerics;
-using System.Security.Cryptography.X509Certificates;
-using System.Buffers;
+﻿using System.Buffers;
 using System.Data;
-using System.Diagnostics;
-using System.Net.Sockets;
-using System.Threading;
-using System.Runtime.Serialization;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Net.Mail;
-using System.Net;
-using System.ComponentModel;
-using System.Globalization;
-using System.Net.Mime;
 using System;
-using System.Text;
-using System.Text.RegularExpressions;
-using io = System.IO;
+using IO = System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,8 +26,8 @@ namespace Songs.Web.Controllers
             this.hostingEnvironment = hostingEnvironment;
             var root = hostingEnvironment.ContentRootPath;
 
-            var localDevPath = io.Path.Combine(root, "Songs.Web");
-            if (io.Directory.Exists(localDevPath))
+            var localDevPath = IO.Path.Combine(root, "Songs.Web");
+            if (IO.Directory.Exists(localDevPath))
             {
                 root = localDevPath;
             }
@@ -76,12 +61,12 @@ namespace Songs.Web.Controllers
             }
 
             var fn = $"{Home}/usa5.txt";
-            if (!io.File.Exists(fn))
+            if (!IO.File.Exists(fn))
             {
                 return UnprocessableEntity(new { error = $"{fn} not found" });
             }
 
-            _words = _words ?? io.File.ReadAllLines(fn);
+            _words = _words ?? IO.File.ReadAllLines(fn);
 
             var words = Go(status, _words);
 

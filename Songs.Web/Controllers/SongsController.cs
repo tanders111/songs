@@ -1,13 +1,9 @@
-﻿using System.ComponentModel;
-using System.Globalization;
-using System.Net.Mime;
-using System;
+﻿using System;
 using System.Text;
 using System.Text.RegularExpressions;
-using io = System.IO;
+using IO = System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
@@ -48,11 +44,11 @@ namespace Songs.Web.Controllers
 //var sw = new System.Diagnostics.Stopwatch();sw.Start();
             var songs = new List<SongSummary>();
 
-            var files = io.Directory.GetFiles(Home);
+            var files = IO.Directory.GetFiles(Home);
 
             foreach (var f in files)
             { 
-                var fileName = new io.FileInfo(f).Name;
+                var fileName = new IO.FileInfo(f).Name;
                 var song = GetSongSummary(fileName);
                         
                 songs.Add(song);
@@ -63,8 +59,8 @@ namespace Songs.Web.Controllers
 
         private SongSummary GetSongSummary(string fileName)
         {
-            var songPath = io.Path.Combine(Home, fileName);
-            var txt = io.File.ReadAllText(songPath, Encoding.UTF8);
+            var songPath = IO.Path.Combine(Home, fileName);
+            var txt = IO.File.ReadAllText(songPath, Encoding.UTF8);
 
             new List<string> { "\n", "\r", ".", ",", "\"", "(", ")"}.ForEach(s => txt = txt.Replace(s, " "));
 
@@ -103,10 +99,10 @@ namespace Songs.Web.Controllers
 
         private string[] GetSongLines(string songPath)
         {
-            var song = io.Path.Join(Home, songPath);
-            var txt = io.File.ReadAllText(song);
+            var song = IO.Path.Join(Home, songPath);
+            var txt = IO.File.ReadAllText(song);
 
-            var lines = io.File.ReadLines(song).ToArray();;
+            var lines = IO.File.ReadLines(song).ToArray();;
 
             return lines;
         }
