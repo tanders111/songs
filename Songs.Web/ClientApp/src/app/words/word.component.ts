@@ -3,7 +3,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
 
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 
 @Component({
@@ -50,6 +50,32 @@ export class WordComponent implements OnInit {
     } catch (e) {
       alert(JSON.stringify(e, null, 2));
       console.error('error getting words', e);
+    }
+  }
+
+  async anagrams() {
+    try {
+      this.potential = await this.http.get<string[]>(`app/anagrams/${this.status.hasNot}`).toPromise();
+    } catch (e) {
+      console.error(e);
+      alert(e.toString());
+    }
+  }
+
+  async bee() {
+    try {
+      let required = this.correct[0];
+      if (!required?.length) {
+        alert('please enter rquired letter');
+        return;
+      }
+
+      let parms = new HttpParams().append('required', required);
+
+      this.potential = await this.http.get<string[]>(`app/bee/${this.status.hasNot}`, {params: parms}).toPromise();
+    } catch (e) {
+      console.error(e);
+      alert(e.toString());
     }
   }
 

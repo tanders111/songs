@@ -9,6 +9,7 @@ const routes: Routes = [
 
   // { path: '', component: SongComponent }.
   { path: 'word', component: WordComponent },
+  { path: 'words', component: WordComponent },
   { path: '',  component: SongComponent, pathMatch: 'full' },
   { path: 'songs/:file', component: SongComponent, pathMatch: 'full', canDeactivate: [NavGuard] },
   { path: 'print/:file', component: SongPrintComponent, pathMatch: 'full' },

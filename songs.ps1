@@ -76,7 +76,7 @@ function usage() {
 $root = Get-Location;
 
 $deployroot = "c:\dev\deploy\song"
-$pubroot = Join-Path $root "Songs.Web\bin\Release\net60\publish"
+$pubroot = Join-Path $root "Songs.Web\bin\Release\net8.0\publish"
 $clientroot = Join-Path $root "Songs.Web\ClientApp"
 $songroot = "C:\Users\Todd\OneDrive\Todd\music\songs"
 

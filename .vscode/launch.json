@@ -9,7 +9,7 @@
         "type": "coreclr",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${workspaceFolder}/Songs.Web/bin/Debug/net60/Songs.Web.dll",
+        "program": "${workspaceFolder}/Songs.Web/bin/Debug/net8.0/Songs.Web.dll",
         "args": ["--hosturls", "http://localhost:5080,http://0.0.0.0:5080"],
         "cwd": "${workspaceFolder}",
         "stopAtEntry": false,

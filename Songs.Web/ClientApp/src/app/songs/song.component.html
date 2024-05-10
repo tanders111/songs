@@ -1,14 +1,14 @@
 <div class="row flex-nowrap">
   <div class="col-auto p-0">
 
-    <div *ngIf="!hideList"
+    <div *ngIf="showList"
       style="max-width: 260px;  height: calc(99vh); vertical-align: top; overflow: auto; overflow-x: hidden;">
       <song-list [song]="songSummary"></song-list>
     </div>
   </div>
 
   <div class="col p-0">
-    <div class="d-inline-block p-2" [ngClass]="[hideList ? 'full-width' : 'search-width']" style=" height: calc(99vh);">
+    <div class="d-inline-block p-2" [ngClass]="[!showList ? 'full-width' : 'search-width']" style=" height: calc(99vh);">
 
       <div class="row mb-1">
 
@@ -16,9 +16,10 @@
           <song-search></song-search>
         </div>
 
-        <div class="col" *ngIf="!zoom?.compact || ui.tools">
+        <div class="col" *ngIf="!zoom?.compact || ui.tools" (dblclick)="words()">
           <pre [ngClass]="zoom?.fontClass"
-            style="overflow: none; word-break: break-all;">{{song?.header?.join('\n')}}</pre>
+            style="overflow: none; word-break: break-all;">{{song?.header?.join('\n')}}
+          </pre>
         </div>
 
 
@@ -46,7 +47,7 @@
         </div>
       </div>
 
-      <div (dblclick)="toggleHideList()">
+      <div (dblclick)="toggleList()">
 
         <ng-container *ngIf="singleColumn || song?.blocks?.length === 1">
 

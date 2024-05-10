@@ -35,7 +35,7 @@ export class SongComponent  implements OnInit {
   zoom: Zoom;
 
   singleColumn: boolean = false;
-  hideList: boolean = true;
+  showList = false;
 
   constructor(
     private songService: SongsService,
@@ -51,7 +51,6 @@ export class SongComponent  implements OnInit {
       this.file = file;
       await this.refresh(file);
     });
-    //let file =  this.route.snapshot.paramMap.get('file');
     
 
     fromEvent(window, 'resize')
@@ -83,9 +82,13 @@ export class SongComponent  implements OnInit {
       alert('no summary in song');
   }
 
-  async toggleHideList() {
-    this.hideList = !this.hideList;
-    this.zone.run(() => { });
+  words() {
+    this.router.navigate(['words']);
+  }
+
+  async toggleList() {
+    this.showList = !this.showList; 
+    //this.zone.run(() => { });
   }
 
   canDeactivate() { return true; }

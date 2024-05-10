@@ -34,6 +34,38 @@ namespace Songs.Web.Controllers
             Home = $"{root}/words";
         }
 
+        [HttpGet]
+        [Route("app/anagrams/{letters}")]
+        public IActionResult GetAnagrams(string letters)
+        {
+            if (string.IsNullOrEmpty(letters))
+                return Ok(new List<string> { "no input"});
+
+            var fn = $"{Home}/usa.txt";
+            if (!IO.File.Exists(fn))
+                return UnprocessableEntity(new { error = $"{fn} not found" });
+            
+            var all = IO.File.ReadAllLines(fn);
+            var matches = Anagrams.Get(all, letters);
+            return Ok(matches);
+        }
+
+        [HttpGet]
+        [Route("app/bee/{letters}")]
+        public IActionResult GetAnagrams(string letters, [FromQuery]char required, [FromQuery]int min = 4)
+        {
+            if (string.IsNullOrEmpty(letters))
+                return Ok(new List<string> { "no input" });
+
+            var fn = $"{Home}/usa.txt";
+            if (!IO.File.Exists(fn))
+                return UnprocessableEntity(new { error = $"{fn} not found" });
+
+            var all = IO.File.ReadAllLines(fn);
+            var matches = Anagrams.Bee(all, letters, required, min);
+            return Ok(matches);
+        }
+
         [HttpPost]
         [Route("app/word")]
         public IActionResult GetPotential([FromBody] StatusModel statusModel)
@@ -84,9 +116,8 @@ namespace Songs.Web.Controllers
             var bestGuess =
             //Test(status, potential)
             //new LetterAccum(status, potential).GetBestGuess()
-            new PositionAccum(status, potential).GetBestGuess()
-            ;
-            ;
+            new PositionAccum(status, potential).GetBestGuess();
+            
             take.Insert(0, '*'+ bestGuess);
             Console.WriteLine($"done!   found {take.Count()} words.  Best guess is {bestGuess}");
 
@@ -130,9 +161,6 @@ namespace Songs.Web.Controllers
 
             return potential;
         }
-
-       
-
     }
 
     public class Charmap : Dictionary<char, int> { }
