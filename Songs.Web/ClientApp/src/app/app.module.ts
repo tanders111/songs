@@ -3,7 +3,7 @@ import { NgModule, ErrorHandler, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SongListComponent } from './songs/song-list.component';
 import { GlobalErrorHandler } from './shared/global-error-handler'
@@ -16,34 +16,27 @@ import { SongsService } from './songs/songs.service';
 import { WordComponent } from './words/word.component';
 import { Icons } from './icons';
 
-@NgModule({
-  declarations: [
-    AppComponent, SongListComponent, SongComponent, SongPrintComponent, SongSearchComponent, WordComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgbModule,
-    FormsModule,
-    NgSelectModule,
-    FontAwesomeModule
-  ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (cfg: SongsService) => () => cfg.load(),
-      multi: true,
-      deps: [SongsService]
-    },
-    {
-      provide: ErrorHandler,
-      useClass: GlobalErrorHandler
-    }
-
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent, SongListComponent, SongComponent, SongPrintComponent, SongSearchComponent, WordComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        FormsModule,
+        NgSelectModule,
+        FontAwesomeModule], providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: (cfg: SongsService) => () => cfg.load(),
+            multi: true,
+            deps: [SongsService]
+        },
+        {
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandler
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
 
   constructor(library: FaIconLibrary) {
