@@ -2,5 +2,7 @@
     "appService.zipIgnorePattern": [
         "node_modules{,/**}",
         ".vscode{,/**}"
-    ]
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/6836a51d-2191-41b0-addb-ecfdd026b553/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/tsongs",
+    "appService.deploySubpath": "Songs.Web\\bin\\Release\\net8.0\\publish"
 }

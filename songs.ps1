@@ -29,7 +29,7 @@ function copySongFiles() {
 function deployAll() {
     
     Write-Host "initiating sc stop song"
-    Stop-Service -name song -ErrorAction Stop
+    Stop-Service -name songs -ErrorAction Stop
     Start-Sleep -Seconds 1
 
     Write-Host "begin dotnet publish"
@@ -49,19 +49,19 @@ function deployAll() {
 
     Write-Host "deploy complete.  initiating sc start songs"
 
-    Start-Service -name song
-    WaitUntilServices "song" "Running"
+    Start-Service -name songs
+    WaitUntilServices "songs" "Running"
 }
 
 function copyDist() {
-    WaitUntilServices "song" "Stopped"
+    WaitUntilServices "songs" "Stopped"
 
     robocopy $songroot $pubroot\files /MIR
 
     robocopy $pubroot $deployroot
 
-    Start-Service -name song
-    WaitUntilServices "song" "Running"
+    Start-Service -name songs
+    WaitUntilServices "songs" "Running"
 }
 
 function usage() {
@@ -78,7 +78,7 @@ $root = Get-Location;
 $deployroot = "c:\dev\deploy\song"
 $pubroot = Join-Path $root "Songs.Web\bin\Release\net8.0\publish"
 $clientroot = Join-Path $root "Songs.Web\ClientApp"
-$songroot = "C:\Users\Todd\OneDrive\Todd\music\songs"
+$songroot = "C:\Users\tande\OneDrive\Todd\music\songs"
 
 if (!(Test-Path "songs.sln")) {
     $defaultRoot = "c:/dev/songs"
