@@ -16,10 +16,17 @@ from the browser go to  http://localhost:5080
 
 
 to edit text files in vscode create a link to them:
-mklink /J files C:\Users\Todd\Documents\music\songs
 mklink /J files C:\Users\Todd\OneDrive\Todd\music\songs
 ```
 
+## azure
+sign in to azure extension
+
+right click "...\bin\Release\net8.0\publish"  and select 'Deploy to web app'
+
+confirm the app service is tsongs
+
+in azure portal the setup is in Settings/Resources from the home page
 
 ## prod mode
 

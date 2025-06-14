@@ -36,7 +36,7 @@ function deployAll() {
     
     Start-Process -FilePath "dotnet" -Wait  -ArgumentList "publish -c Release" -ErrorAction Stop
 
-    Write-Host "dotnet publish complete.   starting client buid"
+    Write-Host "dotnet publish complete.   starting client build"
 
     buildClient
 
@@ -69,7 +69,7 @@ function usage() {
     Write-Host "Usage:  songs env | client | deploy | files"
     Write-Host ""
     Write-Host "files:  copies the song text files"
-    Write-Host "client: builds angular app  and copeis  files"
+    Write-Host "client: builds angular app  and copies  files"
     Write-Host "deploy: server + client + files"
 }
 

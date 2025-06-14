@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {SongSummary, Song, SongsService} from './songs/songs.service'
 
 @Component({
-  selector: 'app-root',
-  templateUrl: `app.component.html`,
-  styles: []
+    selector: 'app-root',
+    templateUrl: `app.component.html`,
+    styles: [],
+    standalone: false
 })
 export class AppComponent implements OnInit {
 

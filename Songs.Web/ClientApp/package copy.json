@@ -35,10 +35,11 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.15",
    
+   
     "@angular/cli": "^19.2.15",
     "@angular/compiler-cli": "^19.2.14",
     "@types/node": "^12.11.1",
-    
+   
     "typescript": "~5.8.3"
   }
 }

@@ -5,9 +5,10 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'song-list',
-  templateUrl: './song-list.component.html',
-  styleUrls: ['./song-list.component.scss']
+    selector: 'song-list',
+    templateUrl: './song-list.component.html',
+    styleUrls: ['./song-list.component.scss'],
+    standalone: false
 })
 export class SongListComponent implements OnInit {
 

@@ -4,9 +4,10 @@ import { Icons } from '../icons';
 import { SongsService, SongSummary, Song, Block, Zoom } from './songs.service';
 
 @Component({
-  selector: 'song-print',
-  templateUrl: './song-print.component.html',
-  styleUrls: ['song-print.component.scss']
+    selector: 'song-print',
+    templateUrl: './song-print.component.html',
+    styleUrls: ['song-print.component.scss'],
+    standalone: false
 })
 export class SongPrintComponent implements OnInit {
 

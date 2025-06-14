@@ -7,8 +7,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 
 @Component({
-  selector: 'word',
-  templateUrl: 'word.component.html'
+    selector: 'word',
+    templateUrl: 'word.component.html',
+    standalone: false
 })
 export class WordComponent implements OnInit {
 

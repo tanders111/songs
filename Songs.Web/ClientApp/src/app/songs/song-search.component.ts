@@ -6,9 +6,10 @@ import { Icons } from '../icons';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'song-search',
-  templateUrl: './song-search.component.html',
-  styleUrls: []
+    selector: 'song-search',
+    templateUrl: './song-search.component.html',
+    styleUrls: [],
+    standalone: false
 })
 export class SongSearchComponent implements OnInit {
 

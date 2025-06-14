@@ -6,13 +6,15 @@ import { Icons } from '../icons';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
-  selector: 'song',
-  templateUrl: './song.component.html',
-  styles: [
-    `.compact-select {width: 100%}
+    selector: 'song',
+    templateUrl: './song.component.html',
+    styles: [
+        `.compact-select {width: 100%}
     .full-select {width: 260px;}
     body { background-color: #556}
-    `]
+    `
+    ],
+    standalone: false
 })
 export class SongComponent  implements OnInit {
 
